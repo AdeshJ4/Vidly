@@ -1,0 +1,29 @@
+﻿@model Vidly.ViewModels.RandomMovieViewModel;
+
+@{
+	ViewData["Title"] = "Random Page";
+}
+<!--How to render classes dynamically-->
+@{
+	var className = Model.Customers.Count > 1 ? "popular" : null;
+}
+
+<h1 class="display-4 @className">@Model.Movie.Name</h1>
+
+@if (Model.Customers.Count == 0)
+{
+	<text>No one has renteford this movie before</text>
+}
+else
+{
+	<div>
+		<ul>
+			@foreach (var customer in Model.Customers)
+			{
+				<li>@customer.Name</li>
+			}
+		</ul>
+	</div>
+
+}
+
