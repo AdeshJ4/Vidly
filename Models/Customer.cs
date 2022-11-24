@@ -9,6 +9,6 @@ namespace Vidly.Models
         [Required]  
         public string? Name { get; set; }
 
-        public bool IsSubscribedToNewsLetter { get; set; };
+        public bool IsSubscribedToNewsLetter { get; set; }
     }
 }
