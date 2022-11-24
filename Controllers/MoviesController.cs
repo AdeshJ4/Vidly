@@ -6,7 +6,7 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
-
+ 
         public IActionResult Index ()
         {
             IEnumerable<Movie> movies = GetMovies();

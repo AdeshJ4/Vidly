@@ -1,8 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Vidly.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,10 +34,6 @@ app.MapControllerRoute(
     //new { year = @"\d{4}", month = @"\d{2}"}); // d -> digit (you must specify 4 digit year and 2 digit month otherwise tyou will get error)
     new { year = @"2015|2016", month = @"\d{2}" }); // only 2015 & 2016 is enable. 
 */
-
-app.MapControllerRoute(
-    name: "moviesByReleasedata",
-    pattern: "{controller=Movies}/{action=ByReleaseDate}/{year?}/{month?}");
 
 app.MapControllerRoute(
     name: "default",
