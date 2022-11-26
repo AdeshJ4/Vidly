@@ -36,6 +36,7 @@
                 <tr>
                     <th>Customer ID</th>
                     <th>Customer Name</th>
+                 
                 </tr>
                 <tr></tr>
             </thead>
@@ -44,8 +45,8 @@
                 {
                     <tr>
                         @*
-                @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
-                *@
+                            @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
+                        *@
                         <td>
                             @customer.Id
                         </td>
@@ -53,6 +54,8 @@
                         <td>
                             <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>
                         </td>
+
+                        
                     </tr>
                 }
             </tbody>

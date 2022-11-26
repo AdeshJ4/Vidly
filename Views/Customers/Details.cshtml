@@ -1,7 +1,45 @@
 ﻿@model Vidly.Models.Customer
 
 @{
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = "Details";
 }
 
-<h2>@Model.Name</h2>
+<div class="container p-3">
+        <div class="col-6">
+            <h2 class="text-primary">Details</h2>
+        </div>
+    </div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Duration</th>
+            <th>Discount Rate</th>
+        </tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+       
+            <tr>
+               
+                <td>
+                    @Model.Id
+                </td>
+
+                <td>
+                    @Model.Name
+                </td>
+
+                <td>
+                    @Model.MembershipType.DurationInMonths
+                </td>
+
+                <td>
+                    @Model.MembershipType.DiscountRate%
+                </td>
+            </tr>
+        
+    </tbody>
+</table>

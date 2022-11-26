@@ -6,7 +6,9 @@ namespace Vidly.Models
     {
         [Key]
         public int? Id { get; set; } 
-        [Required]  
+        
+        [Required]
+        [StringLength(100)]
         public string? Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
 
@@ -22,7 +24,7 @@ namespace Vidly.Models
         /* 
          * Sometimes for optimization we don't want to load the entire membership object we may need only foreign key
          * so we can add another property here 
-         * so Entity framework recognize this conventionand treats this property as aforeign key
+         * so Entity framework recognize this convention and treats this property as a foreign key
          */
 
         public byte MemberShipTypeId { get; set; }  
