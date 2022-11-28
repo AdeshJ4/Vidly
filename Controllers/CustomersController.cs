@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using Vidly.Data;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -30,7 +33,7 @@ namespace Vidly.Controllers
             IEnumerable<Customer> customers = _db.Customers.Include(c => c.MembershipType).ToList(); 
             return View(customers);
         }
-
+        
         public IActionResult Details ( int? id )
         {
             //Customer? customer = GetCustomers().SingleOrDefault(c => c.Id == id);
@@ -41,6 +44,44 @@ namespace Vidly.Controllers
             return View(customer);
         }
 
+        public IActionResult New ()
+        {
+
+            IEnumerable<MembershipType> membershipType = _db.MembershipType.ToList();
+
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipType
+            };
+
+            return View(viewModel);
+
+        }
+
+
+        [HttpPost]
+        public IActionResult Create (Customer customer)
+        {
+            _db.Customers.Add(customer);
+            _db.SaveChanges();  
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult Edit(int id )
+        {
+            Customer? customer = _db.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
+
+            var viewModel = new NewCustomerViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _db.MembershipType.ToList()  
+            };
+
+            return View("New", viewModel);
+        }
 
 
         /*

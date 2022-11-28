@@ -21,7 +21,7 @@
 
     <div class="container p-3">
         <div class="col-6">
-            <h2 class="text-primary">Customers</h2>
+            <h2 class="text-primary">Customers</h2>           
         </div>
     </div>
 
@@ -36,7 +36,6 @@
                 <tr>
                     <th>Customer ID</th>
                     <th>Customer Name</th>
-                 
                 </tr>
                 <tr></tr>
             </thead>
@@ -54,7 +53,6 @@
                         <td>
                             <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>
                         </td>
-
                         
                     </tr>
                 }

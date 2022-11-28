@@ -5,12 +5,16 @@ namespace Vidly.Models
     public class Customer
     {
         [Key]
-        public int? Id { get; set; } 
+        public int Id { get; set; } 
         
         [Required]
         [StringLength(100)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        public DateTime? BirthDate { get; set; }
+
 
         /* 
          * It is called "navigation property" because it allow us to navigate from one type to another. 
@@ -18,7 +22,9 @@ namespace Vidly.Models
          * This navigation property is useful when we want to load an object and its related object together from the database.
          * for ex. we can load the customer and its membership type together.
          */
-        public MembershipType? MembershipType { get; set; }
+
+        [Display(Name = "Membership Type")]
+        public MembershipType MembershipType { get; set; }
 
 
         /* 
@@ -27,6 +33,7 @@ namespace Vidly.Models
          * so Entity framework recognize this convention and treats this property as a foreign key
          */
 
+        [Display(Name = "Membership Type")]
         public byte MemberShipTypeId { get; set; }  
     }
 }

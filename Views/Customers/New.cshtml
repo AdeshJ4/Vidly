@@ -1,0 +1,45 @@
+﻿@model Vidly.ViewModels.NewCustomerViewModel
+
+@{
+    ViewData["Title"] = "New";
+}
+
+
+<html>
+    <head></head>
+    <body>
+        
+    <div class="mb-3">
+        <div class="col-4 mt-8">
+            <h2 class="text-primary">New Customer</h2>
+        </div>
+    </div>
+
+    <form method="post" asp-controller="Customers" asp-action="Create">
+        <div class="mb-3"> 
+            <label asp-for="Customer.Name"  class="form-label"></label>
+            <input asp-for="Customer.Name"  class="form-control" aria-describedby="nameHelp" />
+            <div id="nameHelp" class="form-text">Firstname - MiddleName - Sirname</div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Customer.BirthDate" class="form-label"></label>
+            <input asp-for="Customer.BirthDate" class="form-control"/>
+        </div>
+
+        <div class="mb-3 form-check">          
+            <label asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-label">Is Subscribed To News Letter</label>
+            <input asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-input" />
+        </div>
+
+        <div class="mb-3 dropdown">
+            <label asp-for="Customer.MembershipType" class="form-label"></label>
+            <select asp-for="Customer.MemberShipTypeId" asp-items="@(new SelectList(Model.MembershipTypes, "Id", "Name"))" class="form-control">
+                <option value="">--Choose a Membership Type--</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>   
+    </form>
+    </body>
+</html>

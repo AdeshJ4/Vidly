@@ -1,0 +1,46 @@
+﻿@model Vidly.Models.Movie
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container p-3">
+    <div class="col-6">
+        <h2 class="text-primary">@Model.Name</h2>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Date Added</th>
+            <th>Date Added</th>
+        </tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+
+        <tr>
+
+            <td>
+                @Model.Genre.Name
+            </td>
+
+            <td>
+                @Model.ReleaseDate
+            </td>
+
+            <td>
+                @Model.DateAdded
+            </td>
+
+            <td>
+                @Model.NumberInStock
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
