@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Vidly.Models
 {
@@ -12,7 +13,8 @@ namespace Vidly.Models
         public string Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
 
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "Birth Date")]
+        [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
 
 
@@ -33,7 +35,7 @@ namespace Vidly.Models
          * so Entity framework recognize this convention and treats this property as a foreign key
          */
 
-        [Display(Name = "Membership Type")]
+        [Display(Name = "Membership Type Id")]
         public byte MemberShipTypeId { get; set; }  
     }
 }

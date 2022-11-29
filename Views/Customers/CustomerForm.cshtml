@@ -1,4 +1,4 @@
-﻿@model Vidly.ViewModels.NewCustomerViewModel
+﻿@model Vidly.ViewModels.CustomerFormViewModel
 
 @{
     ViewData["Title"] = "New";
@@ -24,12 +24,10 @@
 
         <div class="mb-3">
             <label asp-for="Customer.BirthDate" class="form-label"></label>
-            <input asp-for="Customer.BirthDate" class="form-control"/>
-        </div>
-
-        <div class="mb-3 form-check">          
-            <label asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-label">Is Subscribed To News Letter</label>
-            <input asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-input" />
+            <input asp-for="Customer.BirthDate"  class="form-control" />
+            @*
+            @Html.TextBoxFor(m => m.Customer.BirthDate, "0:d MMM yyyy", new {@class="form-control"})
+            *@
         </div>
 
         <div class="mb-3 dropdown">
@@ -38,6 +36,12 @@
                 <option value="">--Choose a Membership Type--</option>
             </select>
         </div>
+
+        <div class="mb-3 form-check">          
+            <label asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-label">Is Subscribed To News Letter</label>
+            <input asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-input" />
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Save</button>   
     </form>

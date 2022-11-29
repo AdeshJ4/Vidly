@@ -44,12 +44,12 @@ namespace Vidly.Controllers
             return View(customer);
         }
 
-        public IActionResult New ()
+        public IActionResult CustomerForm ()
         {
 
             IEnumerable<MembershipType> membershipType = _db.MembershipType.ToList();
 
-            var viewModel = new NewCustomerViewModel
+            var viewModel = new CustomerFormViewModel
             {
                 MembershipTypes = membershipType
             };
@@ -74,13 +74,13 @@ namespace Vidly.Controllers
             if (customer == null)
                 return NotFound();
 
-            var viewModel = new NewCustomerViewModel
+            var viewModel = new CustomerFormViewModel
             {
                 Customer = customer,
                 MembershipTypes = _db.MembershipType.ToList()  
             };
 
-            return View("New", viewModel);
+            return View("CustomerForm", viewModel);
         }
 
 
