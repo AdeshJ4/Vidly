@@ -1,0 +1,41 @@
+[33mcommit 65731dda8776a1d90b6de9d1bc77a7de7a990974[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Tue Nov 29 09:20:12 2022 +0530
+
+    Creates Edit Form
+
+[33mcommit 080a96aec247935e8bd0ea97f9cbe7a803b3e8cf[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Mon Nov 28 14:41:46 2022 +0530
+
+    Completed Create Form
+
+[33mcommit 6c60f507ddf39d688be2a17f0edeaf882c8d1023[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Sat Nov 26 17:48:17 2022 +0530
+
+    Exercise 1 completed (Added New Name field in MembershipType Table)
+
+[33mcommit 306a79ca1058091beb4c2d101d82baaaeaae1929[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Thu Nov 24 20:42:03 2022 +0530
+
+    created "add-migration AddMembershipType"
+
+[33mcommit 4bd1867a882f5f8358bb497eced912d9a35c43ee[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Thu Nov 24 19:56:14 2022 +0530
+
+    Created "AddIsSubscribedToCustomer" Migration
+
+[33mcommit 42590ab5094c119816f26cedee03aab851b22401[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Thu Nov 24 19:50:05 2022 +0530
+
+    created InitialModel Migration
+
+[33mcommit 97a630b8d9e5e5c1e4834d3bd0d410be0db639f9[m
+Author: AdeshJ4 <adejad1234@gmail.com>
+Date:   Wed Nov 23 12:00:17 2022 +0530
+
+    Section 2 completed
