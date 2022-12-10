@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Vidly.Models;
+﻿using Vidly.Models;
 
 namespace Vidly.ViewModels
 {

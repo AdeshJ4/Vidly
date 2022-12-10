@@ -13,10 +13,10 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Genre</th>
+            <th>Name</th>
             <th>Release Date</th>
             <th>Date Added</th>
-            <th>Date Added</th>
+            <th>Number In Stock</th>
         </tr>
         <tr></tr>
     </thead>
@@ -38,6 +38,10 @@
 
             <td>
                 @Model.NumberInStock
+            </td>
+
+            <td>
+                <a asp-route-id="@Model.Id" asp-controller="Movies" asp-action="Edit" class="btn btn-primary">Edit</a>
             </td>
 
         </tr>

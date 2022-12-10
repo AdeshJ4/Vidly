@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,6 +35,7 @@ app.MapControllerRoute(
     //new { year = @"\d{4}", month = @"\d{2}"}); // d -> digit (you must specify 4 digit year and 2 digit month otherwise tyou will get error)
     new { year = @"2015|2016", month = @"\d{2}" }); // only 2015 & 2016 is enable. 
 */
+
 
 app.MapControllerRoute(
     name: "default",

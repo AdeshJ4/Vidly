@@ -28,36 +28,44 @@
     @if (!Model.Any())
     {
         <p>We don't have any customers yet.</p>
+        
+            <a asp-controller="Customers" asp-action="CustomerForm" class="btn btn-primary mb-3">New Customer</a>
+        
     }
     else
     {
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Customer Name</th>
-                </tr>
-                <tr></tr>
-            </thead>
-            <tbody>
-                @foreach (var customer in Model)
-                {
+        <div style="overflow-y: scroll">
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        @*
-                            @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
-                        *@
-                        <td>
-                            @customer.Id
-                        </td>
-
-                        <td>
-                            <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Edit">@customer.Name</a>
-                        </td>
-                        
+                        <a asp-controller="Customers" asp-action="CustomerForm" class="btn btn-primary mb-3">New Customer</a>
                     </tr>
-                }
-            </tbody>
-        </table>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                    </tr>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model)
+                    {
+                        <tr>
+                            @*
+                    @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
+                    *@
+                            <td>
+                                @customer.Id
+                            </td>
+
+                            <td>
+                                <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Edit">@customer.Name</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 
 </body>

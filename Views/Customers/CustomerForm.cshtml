@@ -14,27 +14,30 @@
             <h2 class="text-primary">New Customer</h2>
         </div>
     </div>
-
-    <form method="post" asp-controller="Customers" asp-action="Create">
+        
+    <form method="post" asp-controller="Customers" asp-action="Save">
         <div class="mb-3"> 
             <label asp-for="Customer.Name"  class="form-label"></label>
             <input asp-for="Customer.Name"  class="form-control" aria-describedby="nameHelp" />
+            <span asp-validation-for="Customer.Name"></span> <!-- Server side validation-->
             <div id="nameHelp" class="form-text">Firstname - MiddleName - Sirname</div>
         </div>
 
         <div class="mb-3">
             <label asp-for="Customer.BirthDate" class="form-label"></label>
             <input asp-for="Customer.BirthDate"  class="form-control" />
+            <span asp-validation-for="Customer.BirthDate"></span> <!-- Server side validation-->
             @*
             @Html.TextBoxFor(m => m.Customer.BirthDate, "0:d MMM yyyy", new {@class="form-control"})
             *@
         </div>
 
         <div class="mb-3 dropdown">
-            <label asp-for="Customer.MembershipType" class="form-label"></label>
+            <label asp-for="Customer.MemberShipTypeId" class="form-label"></label>
             <select asp-for="Customer.MemberShipTypeId" asp-items="@(new SelectList(Model.MembershipTypes, "Id", "Name"))" class="form-control">
                 <option value="">--Choose a Membership Type--</option>
             </select>
+            <span asp-validation-for="Customer.MemberShipTypeId"></span>
         </div>
 
         <div class="mb-3 form-check">          
@@ -42,8 +45,17 @@
             <input asp-for="Customer.IsSubscribedToNewsLetter" class="form-check-input" />
         </div>
 
-
+        <input asp-for="Customer.Id" hidden />
+        @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">Save</button>   
     </form>
+
+
+    <!-- Client side validaton-->
+    @section Scripts{
+	    @{
+		    <partial name="_ValidationScriptsPartial" />
+	    }
+    }
     </body>
 </html>
