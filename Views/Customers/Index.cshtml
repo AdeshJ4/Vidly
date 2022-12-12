@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Vidly.Models.Customer>
+﻿@model IEnumerable<Vidly.DTOs.CustomerDto>
 
 @*
+    @model IEnumerable<Vidly.Models.Customer> 
+    
     Note: I've set the model for this view to IEnumerable<Customer>.
     This is a simple interface implemented by the list class. Since
     in this view we only want to iterate over this list, and we don't
@@ -58,7 +60,8 @@
                             </td>
 
                             <td>
-                                <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Edit">@customer.Name</a>
+                                <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>
+                                <!--<a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Edit">@customer.Name</a> -->
                             </td>
 
                         </tr>

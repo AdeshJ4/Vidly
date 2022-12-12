@@ -88,7 +88,7 @@ namespace Vidly.Controllers.API
         // update Customer
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<ActionResult<CustomerDto>> UpdateContact ( [FromRoute] int id, CustomerDto cutomerDto )
+        public async Task<ActionResult<CustomerDto>> UpdateCustomer ( [FromRoute] int id, CustomerDto cutomerDto )
         {
             if (!ModelState.IsValid)
             {

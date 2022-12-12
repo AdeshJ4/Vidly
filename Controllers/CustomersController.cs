@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using Vidly.Data;
 using Vidly.Models;
 using Vidly.ViewModels;
 using AutoMapper;
+using Vidly.DTOs;
 
 
 namespace Vidly.Controllers
@@ -13,10 +12,12 @@ namespace Vidly.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IMapper _mapper;
 
-        public CustomersController ( ApplicationDbContext db)
+        public CustomersController ( ApplicationDbContext db, IMapper mapper )
         {
-            _db = db;   
+            _db = db;
+            _mapper = mapper;
         }
 
         protected override void Dispose ( bool disposing )
@@ -24,30 +25,33 @@ namespace Vidly.Controllers
             _db.Dispose();
         }
 
-        public IActionResult Index ()
+        public async Task<IActionResult> Index ()
         {
-            //IEnumerable<Customer> customers = GetCustomers();
-            // get all the customers from the database
-            // querry is excuted immediately because of "ToList() method"
-            // Read "Eager loading" Note for Include() method.we can't access Membershiptype class object inside View so we have to use Include() method
-            IEnumerable<Customer> customers = _db.Customers.Include(c => c.MembershipType).ToList(); 
+
+            //IEnumerable<Customer> customers = await _db.Customers.Include(c => c.MembershipType).ToListAsync();
+            //return View(customers);
+            //var res = await _db.Customers.ToListAsync();
+            //return View(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
+            IEnumerable<CustomerDto> customers = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(await _db.Customers.Include(c => c.MembershipType).ToListAsync());
             return View(customers);
         }
         
-        public IActionResult Details ( int? id )
+        public async Task<IActionResult> Details ( int? id )
         {
             //Customer? customer = GetCustomers().SingleOrDefault(c => c.Id == id);
-            Customer? customer = _db.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id); // querry is excuted immediately because of "SingleOrDefault() method"
+            Customer? customer = await _db.Customers.Include(c => c.MembershipType).SingleOrDefaultAsync(c => c.Id == id); // querry is excuted immediately because of "SingleOrDefault() method"
             if (customer == null)
                 return NotFound();
 
-            return View(customer);
+            //CustomerDto cs = new CustomerDto(customer);
+            //return View(cs);
+            return View(_mapper.Map<CustomerDto>(customer));
         }
 
-        public IActionResult CustomerForm ()
+        public async Task<IActionResult> CustomerForm ()
         {
 
-            IEnumerable<MembershipType> membershipType = _db.MembershipType.ToList();
+            IEnumerable<MembershipType> membershipType = await _db.MembershipType.ToListAsync();
 
             var viewModel = new CustomerFormViewModel
             {
@@ -62,7 +66,7 @@ namespace Vidly.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]  
-        public IActionResult Save (Customer customer)
+        public async Task<IActionResult> Save (Customer customer)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +75,7 @@ namespace Vidly.Controllers
                 var viewModel = new CustomerFormViewModel
                 {
                     Customer = customer,
-                    MembershipTypes = _db.MembershipType.ToList()
+                    MembershipTypes = await _db.MembershipType.ToListAsync()
                 };
                 return View("CustomerForm", viewModel);
             }
@@ -79,12 +83,12 @@ namespace Vidly.Controllers
 
             // if id == 0 then it is new customer so we should added to database otherwise we should update it.
             if (customer.Id == 0)
-                _db.Customers.Add(customer);
+                await _db.Customers.AddAsync(customer);
             else
             {
                 //Now to update an entity we need to get it from database first
                 // if the given customer is not found this is going throw an exception
-                Customer customerInDb = _db.Customers.Single(c => c.Id == customer.Id);
+                Customer customerInDb = await _db.Customers.SingleAsync(c => c.Id == customer.Id);
                 //TryUpdateModelAsync(customerInDb);  // don't use this approach beacuse of security reasons
                 //AutoMapper.Mapper.Map(customer, customerInDb);
                 customerInDb.Name = customer.Name;  
@@ -92,13 +96,13 @@ namespace Vidly.Controllers
                 customerInDb.MemberShipTypeId = customer.MemberShipTypeId; 
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;  
             }
-            _db.SaveChanges();  
+            await _db.SaveChangesAsync();  
             return RedirectToAction("Index");
         }
 
         
-        [HttpPut]
-        public IActionResult Edit(int id )
+        
+        public IActionResult Edit(int id)
         {
             Customer? customer = _db.Customers.SingleOrDefault(c => c.Id == id);
             if (customer == null)
@@ -114,33 +118,17 @@ namespace Vidly.Controllers
         }
 
 
-        [HttpDelete]
-        public IActionResult Delete ( int id )
+      
+        public async Task<IActionResult> Delete ( int id )
         {
-            Customer? customer = _db.Customers.SingleOrDefault(c => c.Id == id);
+            Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
                 return NotFound();
 
             
             _db.Customers.Remove(customer);
-            _db.SaveChangesAsync();
-            return View();
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
-
-
-        /*
-         * Following code is Dead Code because we are getting data from database.
-       
-        private IEnumerable<Customer> GetCustomers ()
-        {
-            return new List<Customer>
-            {
-                
-                new Customer { Id = 1, Name = "BHARATHI CEMENT CORPORATION PVT. LTD." }
-                //new Customer { Id = 2, Name = "Mary Williams" }
-            };
-        }
-        */
-
     }
 }

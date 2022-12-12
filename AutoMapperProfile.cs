@@ -12,10 +12,14 @@ namespace Vidly
             source - destination
             CreateMap<SuperHero, SuperHeroDto>(); // Get
             CreateMap<SuperHeroDto, SuperHero>(); // post
+            CreateMap<MembershipType, MembershipTypeDto>();
+            CreateMap<MembershipTypeDto, MembershipType>();
             */
 
             CreateMap<Customer, CustomerDto>();
             CreateMap<CustomerDto, Customer>();
+
+
         }
     }
 }

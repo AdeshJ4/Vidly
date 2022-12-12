@@ -1,4 +1,7 @@
-﻿@model Vidly.Models.Customer
+﻿@model Vidly.DTOs.CustomerDto
+@*
+@model Vidly.Models.Customer
+*@
 
 @{
     ViewData["Title"] = "Details";
@@ -15,10 +18,7 @@
         <tr>
             <th>Customer ID</th>
             <th>Customer Name</th>
-            <th>Duration</th>
-            <th>Discount Rate</th>
             <th>Membership Type</th>
-            <th>BirthDate</th>
         </tr>
         <tr></tr>
     </thead>
@@ -33,18 +33,29 @@
                 <td>
                     @Model.Name
                 </td>
-
-                <td>
-                    @Model.MembershipType.DurationInMonths months
-                </td>
-
-                <td>
-                    @Model.MembershipType.DiscountRate%
-                </td>
-
                 <td>
                     @Model.MembershipType.Name
                 </td>
+
+                @*
+            <!--
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Duration</th>
+            <th>Discount Rate</th>
+            <th>Membership Type</th>
+            <th>BirthDate</th>
+            <td>
+            @Model.MembershipType.DurationInMonths months
+            </td>
+
+            <td>
+            @Model.MembershipType.DiscountRate%
+            </td>
+
+            <td>
+            @Model.MembershipType.Name
+            </td>
 
                 @if (Model.BirthDate.HasValue){
                     <td>
@@ -55,6 +66,18 @@
                         -
                     </td>
                 }
+            -->
+                *@
+                
+                
+
+
+                <td>
+                    <a asp-route-id="@Model.Id" asp-controller="Customers" asp-action="Edit" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                <a asp-route-id="@Model.Id" asp-controller="Customers" asp-action="Delete" class="btn btn-primary">Delete</a>
+                </td>
 
             
             </tr>
