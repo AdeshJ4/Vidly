@@ -8,17 +8,16 @@ namespace Vidly
     {
         public AutoMapperProfile ()
         {
-            /*
-            source - destination
-            CreateMap<SuperHero, SuperHeroDto>(); // Get
-            CreateMap<SuperHeroDto, SuperHero>(); // post
-            CreateMap<MembershipType, MembershipTypeDto>();
-            CreateMap<MembershipTypeDto, MembershipType>();
-            */
 
+            // Domain to Dto -> Get request
             CreateMap<Customer, CustomerDto>();
-            CreateMap<CustomerDto, Customer>();
+            CreateMap<Movie, MovieDto>();
 
+            // Dto to Domain -> Post request
+            CreateMap<CustomerDto, Customer>()
+                .ForMember(c=>c.Id, opt=>opt.Ignore());
+            CreateMap<MovieDto, Movie>()
+                .ForMember(c=> c.Id, opt=>opt.Ignore());
 
         }
     }

@@ -39,7 +39,7 @@ namespace Vidly.Controllers.API
 
 
 
-        // return specific cutomerDto
+        // return specific cutomer
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<CustomerDto>> GetCustomer ( [FromRoute] int id )
@@ -60,7 +60,7 @@ namespace Vidly.Controllers.API
 
 
 
-        // create cutomerDto
+        // create cutomer
         [HttpPost]
         public async Task<ActionResult<CustomerDto>> CreateCustomer ( CustomerDto cutomerDto )
         {
@@ -96,7 +96,7 @@ namespace Vidly.Controllers.API
                 return BadRequest();
             }
 
-            Customer? customerInDb = _db.Customers.SingleOrDefault(c => c.Id == id);
+            Customer? customerInDb = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             
             if(customerInDb == null)
             {
@@ -117,7 +117,7 @@ namespace Vidly.Controllers.API
                 can infer from the objects we have passed through this method what are the source and target 
                 types 
             */
-            cutomerDto.Id = customerInDb.Id;
+            //cutomerDto.Id = customerInDb.Id;
             _mapper.Map<CustomerDto, Customer>(cutomerDto, customerInDb);
             //customerInDb.Name = cutomerDto.Name;  
             //customerInDb.BirthDate = cutomerDto.BirthDate;    
@@ -136,7 +136,7 @@ namespace Vidly.Controllers.API
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<ActionResult<CustomerDto>> DeleteContact ( [FromRoute] int id )
+        public async Task<ActionResult<CustomerDto>> DeleteCustomer ( [FromRoute] int id )
         {
             Customer? customerInDb = _db.Customers.SingleOrDefault(c => c.Id == id);
 

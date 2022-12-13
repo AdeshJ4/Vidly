@@ -32,8 +32,10 @@ namespace Vidly.Controllers
             //return View(customers);
             //var res = await _db.Customers.ToListAsync();
             //return View(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
+
             IEnumerable<CustomerDto> customers = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(await _db.Customers.Include(c => c.MembershipType).ToListAsync());
             return View(customers);
+            
         }
         
         public async Task<IActionResult> Details ( int? id )
@@ -102,16 +104,16 @@ namespace Vidly.Controllers
 
         
         
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            Customer? customer = _db.Customers.SingleOrDefault(c => c.Id == id);
+            Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
                 return NotFound();
 
             var viewModel = new CustomerFormViewModel
             {
                 Customer = customer,
-                MembershipTypes = _db.MembershipType.ToList()  
+                MembershipTypes = await _db.MembershipType.ToListAsync()  
             };
 
             return View("CustomerForm", viewModel);
