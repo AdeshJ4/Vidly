@@ -73,6 +73,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.10, )"
+            },
+            "jquery.datatables": {
+              "target": "Package",
+              "version": "[1.10.11, )"
             }
           },
           "imports": [
