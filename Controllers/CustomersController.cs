@@ -38,6 +38,7 @@ namespace Vidly.Controllers
             
         }
         
+   
         public async Task<IActionResult> Details ( int? id )
         {
             //Customer? customer = GetCustomers().SingleOrDefault(c => c.Id == id);
