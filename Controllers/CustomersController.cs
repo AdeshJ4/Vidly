@@ -25,17 +25,26 @@ namespace Vidly.Controllers
             _db.Dispose();
         }
 
-        public async Task<IActionResult> Index ()
+        public IActionResult Index ()
         {
+            /*
+             * in our action we don't need to get list of customers because again our DataTable is going to send an ajax request to get them from our cusatomer API.
+             * 
+             * For more information see dataTable_file.js
+             */
 
             //IEnumerable<Customer> customers = await _db.Customers.Include(c => c.MembershipType).ToListAsync();
             //return View(customers);
             //var res = await _db.Customers.ToListAsync();
             //return View(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
 
-            IEnumerable<CustomerDto> customers = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(await _db.Customers.Include(c => c.MembershipType).ToListAsync());
-            return View(customers);
-            
+            // below code is original code so for understanding refer only below code no above.
+            //IEnumerable<CustomerDto> customers = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDto>>(await _db.Customers.Include(c => c.MembershipType).ToListAsync());
+            //return View(customers);
+
+
+            // New Code
+            return View();
         }
         
    

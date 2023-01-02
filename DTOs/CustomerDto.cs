@@ -14,7 +14,6 @@ namespace Vidly.DTOs
 
        
         public bool IsSubscribedToNewsLetter { get; set; }
-        public byte MemberShipTypeId { get; set; }
   
         [DataType(DataType.Date)]
         [Min18YearsIfAmember]
@@ -25,6 +24,7 @@ namespace Vidly.DTOs
         [Display(Name = "Membership Type")]
         public MembershipType? MembershipType { get; set; }
 
+        public byte MemberShipTypeId { get; set; }
 
         /*
         // comment this line if you are using rest API

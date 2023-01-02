@@ -27,54 +27,66 @@
         </div>
     </div>
 
-    @if (!Model.Any())
-    {
-        <p>We don't have any customers yet.</p>
-        
-            <a asp-controller="Customers" asp-action="CustomerForm" class="btn btn-primary mb-3">New Customer</a>
-        
-    }
-    else
-    {
-        
-        <div>
-            <table id="customers" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <a asp-controller="Customers" asp-action="CustomerForm" class="btn btn-primary mb-3">New Customer</a>
-                    </tr>
-                    <tr class="text-center">
-                        <th>Customer ID</th>
-                        <th>Customer Name</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var customer in Model)
-                    {
-                        <tr>
-                            @*
-                                @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
-                            *@
-                            <td>
-                                @customer.Id
-                            </td>
 
-                            <td>
-                                <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>                           
-                            </td>
-                            
-                            <td>
-                                <button data-customer-id="@customer.Id" class="btn btn-primary js-delete">Delete</button>
-                            </td>
+        <table id="customers" class="table table-bordered" style="">
+            <thead class="thead-light">
+                <tr>
+                    <a asp-controller="Customers" asp-action="CustomerForm" class="btn btn-primary mb-3">New Customer</a>
+                </tr>
+                <tr class="text-center">
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Now since we are using our API to render this table we don't need to render the customer on server
+                    so we can rid of this foreach block. But we are leaving the table structure as the placeholder for dataTable.
+                    Also in our action we don't need to get list of customers because again our DataTable is going to send an ajax request to get them from our cusatomer API.
+                    So in our Solution explorer
 
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    For more information see dataTable_file.js
+                -->
+                @*
+                @foreach (var customer in Model)
+                {
+                *@
+                <!--
+                <tr>
+                @*
+                        <!-- The below line is not used(out dataed), this is extra code so please don't use it' -->
+                        @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
+                    *@
 
-    }
+                    <td>
+                @*
+                        @customer.Id
+                        *@
+                    </td>
+
+                    <td>
+                @*
+                        <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>
+                        *@
+                    </td>
+
+                    <td>
+                @*
+                        <button data-customer-id="@customer.Id" class="btn btn-primary js-delete">Delete</button>
+                        *@
+                    </td>
+
+                </tr>
+                 -->
+                 @*
+                }
+                *@
+
+
+            </tbody>
+        </table>
+
+
     @section scripts{
         <script src="~/js/datatable_file.js"></script>
         
