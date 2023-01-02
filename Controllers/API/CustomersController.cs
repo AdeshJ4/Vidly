@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Vidly.DTOs;
-using System.Drawing.Text;
 
 namespace Vidly.Controllers.API
 {
@@ -32,9 +31,13 @@ namespace Vidly.Controllers.API
         {
             //return await _db.Customers.ToListAsync();
             //return Ok(heroes.Select(hero => _mapper.Map<SuperHeroDto>(hero)));
-            var res = await _db.Customers.ToListAsync();
-            return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
+
             //return await _db.Customers.ToListAsync().Select(_mapper.Map<Customer, CustomerDto>);
+
+            //var res = await _db.Customers.ToListAsync();
+            var res = await _db.Customers.Include(c => c.MembershipType).ToListAsync();
+            return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
+
         }
 
 

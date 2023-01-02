@@ -22,7 +22,7 @@ namespace Vidly.DTOs
 
 
         [Display(Name = "Membership Type")]
-        public MembershipType? MembershipType { get; set; }
+        public MembershipTypeDto? MembershipType { get; set; }
 
         public byte MemberShipTypeId { get; set; }
 
