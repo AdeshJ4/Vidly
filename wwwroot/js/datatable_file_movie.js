@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () { 
-    var table = $("#customers").DataTable({
+    var table = $("#movies").DataTable({
         ajax: {
-            url: "/api/Customers",
+            url: "/api/Movies",
             dataSrc: ""
         },
         columns: [
@@ -13,20 +13,20 @@
             //column 2
             {
                 data: "name",
-                render: function (data, type, customer) {
-                    return "<a href='/customers/Details/" + customer.id + "'>" + customer.name + "</a>";
+                render: function (data, type, movie) {
+                    return "<a href='/movies/Details/" + movie.id + "'>" + movie.name + "</a>";
                 }
 
             },
             // column 3
             {
-                data: "membershipType.name"
+                data: "genre.name"
             },
             // column 4
             {
                 data: "id",
                 render: function (data) {
-                    return "<button class='btn btn-primary js-delete' data-customer-id=" + data + ">Delete</button>";
+                    return "<button class='btn btn-primary js-delete' data-movie-id=" + data + ">Delete</button>";
                 }
             }
             
@@ -35,12 +35,12 @@
 
 
     // select customers table and find all the elements with this class "js-delete"
-    $("#customers").on("click", ".js-delete", function () {
+    $("#movies").on("click", ".js-delete", function () {
         var button = $(this);
         // if our confirmation return true then we want to call our API using jQuery Ajax
         if (confirm("Are you sure you want to delete this customer ? ")) {
             $.ajax({
-                url: "/api/customers/" + button.attr("data-customer-id"),
+                url: "/api/movies/" + button.attr("data-movie-id"),
                 method: "DELETE",
                 success: function () {
                     /* 

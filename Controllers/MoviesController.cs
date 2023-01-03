@@ -23,23 +23,10 @@ namespace Vidly.Controllers
 
         public async Task<IActionResult> Index ()
         {
-            IEnumerable<Movie> movies = await _db.Movies.Include(g => g.Genre).ToListAsync();
-            return View(movies);
+            //IEnumerable<Movie> movies = await _db.Movies.Include(g => g.Genre).ToListAsync();
+            //return View(movies);
+            return View();
         }
-
-        /*
-        public async Task<IActionResult> New ()
-        {
-            var genres = await _db.Genre.ToListAsync();
-
-            var viewModel = new MovieFormViewModel
-            {
-                Genre = genres
-            };
-
-            return View("MovieForm", viewModel);
-        }
-        */
 
         public async Task<IActionResult> MovieForm ()
         {

@@ -25,7 +25,7 @@ namespace Vidly.Controllers.API
         [Produces("application/json")]
         public async Task<ActionResult<MovieDto>> GetMovies ()
         {
-            var res = await _db.Movies.ToListAsync();
+            var res = await _db.Movies.Include(m=> m.Genre).ToListAsync();
             return Ok(res.Select(cs => _mapper.Map<MovieDto>(cs)));
         }
 
@@ -34,7 +34,7 @@ namespace Vidly.Controllers.API
         [Route("{id:int}")]
         public async Task<ActionResult<MovieDto>> GetMovie ( [FromRoute] int id )
         {
-            Movie movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
+            Movie? movie = await _db.Movies.Include(m => m.Genre).SingleOrDefaultAsync(c => c.Id == id);
             if (movie == null)
                 return NotFound();
             return Ok(_mapper.Map<MovieDto>(movie));
@@ -60,24 +60,20 @@ namespace Vidly.Controllers.API
         // update Movie
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<ActionResult<MovieDto>> UpdateCustomer ( [FromRoute] int id, MovieDto movieDto )
+        public async Task<ActionResult> UpdateMovie ( [FromRoute] int id, MovieDto movieDto )
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
 
-            Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
+            Movie? movieInDb = await _db.Movies.Include(m => m.Genre).SingleOrDefaultAsync(c => c.Id == id);
 
-            if (movie == null)
-            {
+            if (movieInDb == null)
                 return NotFound();
-            }
 
             //movieDto.Id = movie.Id;
-            _mapper.Map<MovieDto, Movie>(movieDto, movie);
+            _mapper.Map(movieDto, movieInDb);
             await _db.SaveChangesAsync();
-            return Ok(movieDto);
+            return Ok();
         }
 
 
@@ -86,7 +82,7 @@ namespace Vidly.Controllers.API
         [Route("{id:int}")]
         public async Task<IActionResult> DeleteMovie ( [FromRoute] int id )
         {
-            Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
+            Movie? movie = await _db.Movies.Include(m=> m.Genre).SingleOrDefaultAsync(c => c.Id == id);
 
             if (movie == null)
             {

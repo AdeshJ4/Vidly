@@ -28,16 +28,9 @@ namespace Vidly.Controllers.API
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<CustomerDto>> GetCustomers ()
-        {
-            //return await _db.Customers.ToListAsync();
-            //return Ok(heroes.Select(hero => _mapper.Map<SuperHeroDto>(hero)));
-
-            //return await _db.Customers.ToListAsync().Select(_mapper.Map<Customer, CustomerDto>);
-
-            //var res = await _db.Customers.ToListAsync();
+        {           
             var res = await _db.Customers.Include(c => c.MembershipType).ToListAsync();
             return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
-
         }
 
 
@@ -47,17 +40,13 @@ namespace Vidly.Controllers.API
         [Route("{id:int}")]
         public async Task<ActionResult<CustomerDto>> GetCustomer ( [FromRoute] int id )
         {
-            Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
+            Customer? customer = await _db.Customers.Include(c => c.MembershipType).SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
             {
-                //throw new HttpResponseException(HttpStatusCode.NotFound);
-                //return NotFound(HttpStatusCode.NotFound);
-                //return StatusCode(StatusCodes.Status404NotFound);
+               
                 return NotFound();
             }
 
-            //return (IActionResult)cutomerDto;
-            //return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
             return Ok(_mapper.Map<CustomerDto>(customer));
         }
 
@@ -69,19 +58,14 @@ namespace Vidly.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                //return StatusCode(StatusCodes.Status400BadRequest);
                 return BadRequest();
             }
 
-            //SuperHero hero = _mapper.Map<SuperHero>(newHero); // we want to map newHero to SuperHero
-            //heroes.Add(hero);
-            //return Ok(heroes.Select(hero => _mapper.Map<SuperHeroDto>(hero)));
-            // I didn't pass second argunment inside () so it created a new obj and return it inside customer
-            Customer customer = _mapper.Map<Customer>(cutomerDto);
+            //Customer customer = _mapper.Map<Customer>(cutomerDto);
+            //cutomerDto.Id = customer.Id;
+            Customer customer = _mapper.Map<CustomerDto, Customer>(cutomerDto);
             await _db.Customers.AddAsync(customer);
             await _db.SaveChangesAsync();
-            cutomerDto.Id = customer.Id;
-
             return Ok(cutomerDto);
         }
 
@@ -95,7 +79,6 @@ namespace Vidly.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                //return StatusCode(StatusCodes.Status400BadRequest);
                 return BadRequest();
             }
 
@@ -103,7 +86,6 @@ namespace Vidly.Controllers.API
             
             if(customerInDb == null)
             {
-                //return StatusCode(StatusCodes.Status404NotFound);
                 return NotFound();
             }
 
