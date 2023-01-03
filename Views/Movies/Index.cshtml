@@ -23,6 +23,7 @@
 			<tr>
 				<th>Movie</th>
 				<th>Genre</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,6 +36,10 @@
 
 					<td>
 						@movie.Genre.Name
+					</td>
+
+					<td>
+						<a asp-route-id="@movie.Id" asp-controller="Movies" asp-action="Delete">Delete</a>
 					</td>
 				</tr>
 			}

@@ -21,16 +21,16 @@ namespace Vidly.Controllers
             _db.Dispose();
         }
 
-        public IActionResult Index ()
+        public async Task<IActionResult> Index ()
         {
-            IEnumerable<Movie> movies = _db.Movies.Include(g => g.Genre).ToList();
+            IEnumerable<Movie> movies = await _db.Movies.Include(g => g.Genre).ToListAsync();
             return View(movies);
         }
 
         /*
-        public IActionResult New ()
+        public async Task<IActionResult> New ()
         {
-            var genres = _db.Genre.ToList();
+            var genres = await _db.Genre.ToListAsync();
 
             var viewModel = new MovieFormViewModel
             {
@@ -41,10 +41,10 @@ namespace Vidly.Controllers
         }
         */
 
-        public IActionResult MovieForm ()
+        public async Task<IActionResult> MovieForm ()
         {
             //IEnumerable<Genre> genres = _db.Genre.ToList();
-            var genres = _db.Genre.ToList();
+            var genres = await _db.Genre.ToListAsync();
             var viewModel = new MovieFormViewModel
             {
                 Genre = genres
@@ -55,23 +55,23 @@ namespace Vidly.Controllers
 
 
 
-        public IActionResult Edit ( int id )
+        public async Task<IActionResult> Edit ( int id )
         {
-            Movie? movie = _db.Movies.SingleOrDefault(c => c.Id == id);
+            Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
             if (movie == null)
                 return NotFound();
 
             var viewModel = new MovieFormViewModel(movie)
             {
-                Genre = _db.Genre.ToList()
+                Genre = await _db.Genre.ToListAsync()
             };
 
             return View("MovieForm", viewModel);
         }
 
-        public IActionResult Details ( int? id )
+        public async Task<IActionResult> Details ( int? id )
         {
-            Movie? movie = _db.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id);
+            Movie? movie = await _db.Movies.Include(m => m.Genre).SingleOrDefaultAsync(c => c.Id == id);
             if (movie == null)
                 return NotFound();
 
@@ -110,6 +110,19 @@ namespace Vidly.Controllers
             return RedirectToAction("Index");
         }   
 
+
+
+        public async Task<IActionResult> Delete(int id )
+        {
+            Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (movie == null)
+                return NotFound();
+
+            _db.Movies.Remove(movie);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
         
     }
 }

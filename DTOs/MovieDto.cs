@@ -12,7 +12,7 @@ namespace Vidly.DTOs
         [MaxLength(250)]
         public string Name { get; set; }
 
-        //public Genre Genre { get; set; }
+        public GenreDto Genre { get; set; }
 
         [Required]
         public byte GenreId { get; set; }
