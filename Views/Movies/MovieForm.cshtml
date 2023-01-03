@@ -32,14 +32,16 @@
             *@
         </div>
 
+
         <div class="mb-3 dropdown">
-            <label asp-for="Genre" class="form-label"></label>
+            <label asp-for="GenreId" class="form-label"></label>
             <select asp-for="GenreId" asp-items="@(new SelectList(Model.Genre, "Id", "Name"))" class="form-control">
                 <option value="">--Choose Genre--</option>
             </select>
             <span asp-validation-for="GenreId"></span> <!-- Server side validation-->
         </div>
 
+       
         <div class="mb-3">
             <label asp-for=" NumberInStock" class="form-label"></label>
             <input asp-for=" NumberInStock" class="form-control"  />

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GcgMiI/UcGwmDReI0tVaixtVGDtJIKb4CmoYenvUc/8=",
+  "Hash": "6xa0OYt2r1X412LiL2maA7b2A9GDS77WCuSlVU3pxEI=",
   "Source": "Vidly",
   "BasePath": "_content/Vidly",
   "Mode": "Default",
@@ -219,6 +219,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\datatable_file.js"
+    },
+    {
+      "Identity": "E:\\z Placement\\dot net\\Projects\\Vidly\\wwwroot\\js\\datatable_file_movie.js",
+      "SourceId": "Vidly",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\z Placement\\dot net\\Projects\\Vidly\\wwwroot\\",
+      "BasePath": "_content/Vidly",
+      "RelativePath": "js/datatable_file_movie.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\datatable_file_movie.js"
     },
     {
       "Identity": "E:\\z Placement\\dot net\\Projects\\Vidly\\wwwroot\\js\\site.js",

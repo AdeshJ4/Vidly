@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
-using Vidly.Migrations;
 using Vidly.Models;
 using Vidly.ViewModels;
 
@@ -28,21 +27,25 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
-
-        public IActionResult Details ( int? id)
+        /*
+        public IActionResult New ()
         {
-            Movie? movie = _db.Movies.Include(m => m.Genre).SingleOrDefault(c=>c.Id == id);
-            if (movie == null)
-                return NotFound();
+            var genres = _db.Genre.ToList();
 
-            return View(movie);
+            var viewModel = new MovieFormViewModel
+            {
+                Genre = genres
+            };
+
+            return View("MovieForm", viewModel);
         }
+        */
 
         public IActionResult MovieForm ()
         {
-            IEnumerable<Genre> genres = _db.Genre.ToList();
-
-            MovieFormViewModel viewModel = new MovieFormViewModel
+            //IEnumerable<Genre> genres = _db.Genre.ToList();
+            var genres = _db.Genre.ToList();
+            var viewModel = new MovieFormViewModel
             {
                 Genre = genres
             };
@@ -50,7 +53,35 @@ namespace Vidly.Controllers
             return View(viewModel);
         }
 
-        //[HttpPost]
+
+
+        public IActionResult Edit ( int id )
+        {
+            Movie? movie = _db.Movies.SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+                return NotFound();
+
+            var viewModel = new MovieFormViewModel(movie)
+            {
+                Genre = _db.Genre.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        public IActionResult Details ( int? id )
+        {
+            Movie? movie = _db.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+                return NotFound();
+
+            return View(movie);
+        }
+
+
+        
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Save (Movie movie)
         {
@@ -58,43 +89,27 @@ namespace Vidly.Controllers
             {
                 // if ModelState is not valid then i wan't to return same view(the view that include the customer form)
                 // viewModel is important to populate the form with the values the user has put int he form
-                MovieFormViewModel viewModel = new MovieFormViewModel(movie)
+                var viewModel = new MovieFormViewModel(movie)
                 {
                     Genre = _db.Genre.ToList()
                 };
                 return View("MovieForm", viewModel);
             }
-            // if id == 0 then it is new customer so we should added to database otherwise we should update it.
+            // if id == 0 then it is new movie so we should added to database otherwise we should update it.
             if (movie.Id == 0)
                 _db.Movies.Add(movie);
             else
-            {
-                //Now to update an entity we need to get it from database first
-                // if the given customer is not found this is going throw an exception
-                Movie movieInDb = _db.Movies.Single(c => c.Id == movie.Id);
-                //TryUpdateModelAsync(customerInDb);  // don't use this approach beacuse of security reasons
-                //AutoMapper.Mapper.Map(customer, customerInDb);
+            {             
+                Movie movieInDb = _db.Movies.Single(c => c.Id == movie.Id); 
                 movieInDb.Name = movie.Name;
-                movieInDb.ReleaseDate = movie.ReleaseDate;
-                movieInDb.Genre = movie.Genre;
+                movieInDb.GenreId = movie.GenreId;
                 movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.ReleaseDate = movie.ReleaseDate;               
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }   
 
-        public IActionResult Edit (int id)
-        {
-            Movie? movie = _db.Movies.SingleOrDefault(c => c.Id == id);
-            if (movie == null)
-                return NotFound();
-
-            MovieFormViewModel viewModel = new MovieFormViewModel(movie)
-            {
-                Genre = _db.Genre.ToList()
-            };
-
-            return View("MovieForm", viewModel);
-        }
+        
     }
 }
