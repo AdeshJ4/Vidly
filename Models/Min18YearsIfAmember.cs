@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
 using Vidly.DTOs;
 
 namespace Vidly.Models

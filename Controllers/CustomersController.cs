@@ -51,8 +51,8 @@ namespace Vidly.Controllers
                 MembershipTypes = membershipType
             };
 
-            //return View(viewModel);
-            return View(_mapper.Map<CustomerFormViewModel, CustomerFormViewModelDTO>(viewModel));
+            return View(viewModel);
+            //return View(_mapper.Map<CustomerFormViewModel, CustomerFormViewModelDTO>(viewModel));
         }
 
 
@@ -62,29 +62,30 @@ namespace Vidly.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
+
                 var viewModel = new CustomerFormViewModel
                 {
                     Customer = customer,
                     MembershipTypes = await _db.MembershipType.ToListAsync()
-                };                
-                return View("CustomerForm", _mapper.Map<CustomerFormViewModelDTO>(viewModel));
+                };
+                
+                return View("CustomerForm", viewModel);
             }
-
-
-            // if id == 0 then it is new customer so we should added to database otherwise we should update it.
+           
             if (customer.Id == 0)
                 await _db.Customers.AddAsync(customer);
             else
             {
-                
+
                 Customer customerInDb = await _db.Customers.SingleAsync(c => c.Id == customer.Id);
-                
+
                 //AutoMapper.Mapper.Map(customer, customerInDb);
+                             
                 customerInDb.Name = customer.Name;
                 customerInDb.BirthDate = customer.BirthDate;
                 customerInDb.MemberShipTypeId = customer.MemberShipTypeId;
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+             
             }
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -93,7 +94,7 @@ namespace Vidly.Controllers
 
 
 
-        public async Task<ActionResult<CustomerFormViewModelDTO>> Edit (int id)
+        public async Task<ActionResult> Edit (int id)
         {
             Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
@@ -105,8 +106,8 @@ namespace Vidly.Controllers
                 MembershipTypes = await _db.MembershipType.ToListAsync()  
             };
 
-            //return View("CustomerForm", viewModel);
-            return View("CustomerForm", _mapper.Map<CustomerFormViewModelDTO>(viewModel));
+            return View("CustomerForm", viewModel);
+                    
         }
 
 

@@ -15,13 +15,14 @@ namespace Vidly
             CreateMap<Movie, MovieDto>();
             CreateMap<MembershipType, MembershipTypeDto>();
             CreateMap<Genre, GenreDto>();
-            CreateMap<CustomerFormViewModel, CustomerFormViewModelDTO>();
+            
 
             // Dto to Domain -> Post request
             CreateMap<CustomerDto, Customer>()
                 .ForMember(c => c.Id, opt => opt.Ignore());
             CreateMap<MovieDto, Movie>()
-                .ForMember(c => c.Id, opt => opt.Ignore());           
+                .ForMember(c => c.Id, opt => opt.Ignore());
+                      
         }
     }
 }
