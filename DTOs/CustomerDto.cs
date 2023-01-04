@@ -26,26 +26,5 @@ namespace Vidly.DTOs
 
         public byte MemberShipTypeId { get; set; }
 
-        /*
-        // comment this line if you are using rest API
-        [Display(Name = "Membership Type")]
-        public MembershipTypeDto? MembershipTypeDto { get; set; }
-         */
-
-
-        /*
-        
-        we exclude MembershipType because this is domain class and this proprty here creating dependency from our DTO to our domain model
-        so if you change this membership type this can impact our DTO.
-        so here we either use primitive data type like integer, string, bytes whatever or custome DTO.
-        so if you want to return hierachical structure you wold create another type called membershipType DTOs
-        This way your DTOs are completly decoupled from your domain object.
-        
-        [Display(Name = "Membership Type")]
-        public MembershipType? MembershipType { get; set; }
-
-         
-         */
-
     }
 }

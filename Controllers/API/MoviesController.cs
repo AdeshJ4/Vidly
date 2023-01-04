@@ -45,42 +45,42 @@ namespace Vidly.Controllers.API
         public async Task<ActionResult<MovieDto>> CreateMovie ( MovieDto movieDto )
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
 
-            Movie movie = _mapper.Map<Movie>(movieDto);
-            await _db.Movies.AddAsync(movie);
+            //Movie movie = _mapper.Map<Movie>(movieDto);
+            var movieInDB = _mapper.Map<MovieDto, Movie>(movieDto);
+            await _db.Movies.AddAsync(movieInDB);
             await _db.SaveChangesAsync();
-            movieDto.Id = movie.Id;
+            movieDto.Id = movieInDB.Id;
             return Ok(movieDto);
+            //return Created(new Uri(Request.R + "/" + movieInDB.Id), movieDto);
         }
 
 
         // update Movie
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<ActionResult> UpdateMovie ( [FromRoute] int id, MovieDto movieDto )
+        public async Task<ActionResult<MovieDto>> UpdateMovie ( [FromRoute] int id, MovieDto movieDto )
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            Movie? movieInDb = await _db.Movies.Include(m => m.Genre).SingleOrDefaultAsync(c => c.Id == id);
+            Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
 
-            if (movieInDb == null)
+            if (movie == null)
                 return NotFound();
 
             //movieDto.Id = movie.Id;
-            _mapper.Map(movieDto, movieInDb);
+            _mapper.Map<MovieDto, Movie>(movieDto, movie);
             await _db.SaveChangesAsync();
-            return Ok();
+            return Ok(movieDto);
         }
 
 
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<IActionResult> DeleteMovie ( [FromRoute] int id )
+        public async Task<ActionResult<MovieDto>> DeleteMovie ( [FromRoute] int id )
         {
             Movie? movie = await _db.Movies.Include(m=> m.Genre).SingleOrDefaultAsync(c => c.Id == id);
 
@@ -91,6 +91,7 @@ namespace Vidly.Controllers.API
 
             _db.Movies.Remove(movie);
             await _db.SaveChangesAsync();
+            
             return Ok(movie);
         }
     }

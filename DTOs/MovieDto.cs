@@ -10,11 +10,13 @@ namespace Vidly.DTOs
 
         [Required(ErrorMessage = "Please enter movie name")]
         [MaxLength(250)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public GenreDto Genre { get; set; }
 
-        [Required]
+        [Display(Name = "Genre Type")]
+        public GenreDto? Genre { get; set; }
+
+
         public byte GenreId { get; set; }
 
         public DateTime DateAdded { get; set; }

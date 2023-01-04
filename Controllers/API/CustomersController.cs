@@ -42,10 +42,7 @@ namespace Vidly.Controllers.API
         {
             Customer? customer = await _db.Customers.Include(c => c.MembershipType).SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
-            {
-               
                 return NotFound();
-            }
 
             return Ok(_mapper.Map<CustomerDto>(customer));
         }
@@ -82,36 +79,19 @@ namespace Vidly.Controllers.API
                 return BadRequest();
             }
 
-            Customer? customerInDb = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
+            Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             
-            if(customerInDb == null)
+            if(customer == null)
             {
                 return NotFound();
             }
-
-            //Customer customer = _mapper.Map<Customer>(cutomerDto);
-            //_mapper.Map<Customer>(customerInDb);
-            /*
-             * Syntax : _mapper.Map<Source, Destination>(source Obj, Destination Obj);
-               In previous ex I didn't pass second argunment inside () so it created a new obj and return
-               it inside customer.
-                but if you have existing object we can pass it here ( ------ , customerInDb) as a 2nd arg.
-                _mapper.Map<CustomerDto, Customer>(cutomerDto, customerInDb) --> this line equal to following line
-                _mapper.Map(cutomerDto, customerInDb);
-                because this generic parameters(<CustomerDto, Customer>) are grayed out beacuse the compiler 
-                can infer from the objects we have passed through this method what are the source and target 
-                types 
-            */
+            
+            //Syntax : _mapper.Map<Source, Destination>(source Obj, Destination Obj);
             //cutomerDto.Id = customerInDb.Id;
-            _mapper.Map<CustomerDto, Customer>(cutomerDto, customerInDb);
-            //customerInDb.Name = cutomerDto.Name;  
-            //customerInDb.BirthDate = cutomerDto.BirthDate;    
-            //customerInDb.IsSubscribedToNewsLetter = cutomerDto.IsSubscribedToNewsLetter;  
-            //customerInDb.MemberShipTypeId = cutomerDto.MemberShipTypeId;
+            _mapper.Map<CustomerDto, Customer>(cutomerDto, customer);
 
             await _db.SaveChangesAsync();
 
-            //return (IActionResult)cutomerDto;
             return Ok(cutomerDto);
         }
 
@@ -123,7 +103,7 @@ namespace Vidly.Controllers.API
         [Route("{id:int}")]
         public async Task<ActionResult<CustomerDto>> DeleteCustomer ( [FromRoute] int id )
         {
-            Customer? customerInDb = _db.Customers.SingleOrDefault(c => c.Id == id);
+            Customer? customerInDb = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
 
             if (customerInDb == null)
             {
@@ -133,10 +113,8 @@ namespace Vidly.Controllers.API
 
             _db.Customers.Remove(customerInDb);
             await _db.SaveChangesAsync();
-
-            //return (IActionResult)customerInDb;
+            
             return Ok(customerInDb);
-
         }
     }
 }
