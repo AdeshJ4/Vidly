@@ -5,26 +5,34 @@ namespace Vidly.ViewModels
 {
     public class MovieFormViewModel
     {
-        public IEnumerable<Genre> Genre { get; set; }
-        //public Movie Movie { get; set; } 
-
+        public IEnumerable<Genre>? Genre { get; set; } 
 
         // Pure View Model
         public int? Id { get; set; }
 
+
         [Required(ErrorMessage = "Please enter movie name")]
         [MaxLength(250)]
         public string? Name { get; set; }
+
 
         // This will work as a foreign key
         [Display(Name = "Genre")]
         [Required]
         public byte? GenreId { get; set; }
 
+
         [Display(Name = "Release Date")]
         [Required]
         [DataType(DataType.Date)]
         public DateTime? ReleaseDate { get; set; }
+
+
+        [Display(Name = "Date Added")]
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime? DateAdded { get; set; }
+
 
         [Display(Name = "Number In Stock")]
         [Required]
@@ -51,6 +59,7 @@ namespace Vidly.ViewModels
             Id = movie.Id;
             Name = movie.Name;
             ReleaseDate = movie.ReleaseDate;
+            DateAdded = movie.DateAdded;    
             NumberInStock = movie.NumberInStock;
             GenreId = movie.GenreId;     
         }

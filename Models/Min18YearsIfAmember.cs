@@ -11,8 +11,8 @@ namespace Vidly.Models
             //return base.IsValid(value, validationContext);
             // you can use another proprties of customer class
 
-            //Customer customer = (Customer) validationContext.ObjectInstance;  // original
-            CustomerDto customer = (CustomerDto)validationContext.ObjectInstance;
+            Customer customer = (Customer) validationContext.ObjectInstance;  // View()
+            //CustomerDto customer = (CustomerDto)validationContext.ObjectInstance;  // API
 
             /* MemberShipTypeId == 1 is id of "pay as you go" and we don't care if it is under 18 or not also
                MemberShipTypeId == 0 when user doen not select a membership type (it will not highlight red border for input field) 

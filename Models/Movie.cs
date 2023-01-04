@@ -10,7 +10,7 @@ namespace Vidly.Models
 
         [Required(ErrorMessage = "Please enter movie name")]
         [MaxLength(250)]    
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
 
         [Display(Name = "Genre Type")]

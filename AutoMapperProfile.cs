@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Vidly.DTOs;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly
 {
@@ -14,6 +15,7 @@ namespace Vidly
             CreateMap<Movie, MovieDto>();
             CreateMap<MembershipType, MembershipTypeDto>();
             CreateMap<Genre, GenreDto>();
+            CreateMap<CustomerFormViewModel, CustomerFormViewModelDTO>();
 
             // Dto to Domain -> Post request
             CreateMap<CustomerDto, Customer>()

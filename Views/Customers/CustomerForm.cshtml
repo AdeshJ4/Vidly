@@ -1,4 +1,4 @@
-﻿@model Vidly.ViewModels.CustomerFormViewModel
+﻿@model Vidly.DTOs.CustomerFormViewModelDTO
 
 @{
     ViewData["Title"] = "New";
@@ -6,7 +6,6 @@
 
 
 <html>
-    <head></head>
     <body>
         
     <div class="mb-3">
@@ -16,9 +15,9 @@
     </div>
         
     <form method="post" asp-controller="Customers" asp-action="Save">
-        <div class="mb-3"> 
-            <label asp-for="Customer.Name"  class="form-label"></label>
-            <input asp-for="Customer.Name"  class="form-control" aria-describedby="nameHelp" />
+        <div class="mb-3">             
+            <label asp-for="Customer.Name" class="form-label"></label>
+            <input asp-for="Customer.Name" class="form-control" aria-describedby="nameHelp" />
             <span asp-validation-for="Customer.Name"></span> <!-- Server side validation-->
             <div id="nameHelp" class="form-text">Firstname - MiddleName - Sirname</div>
         </div>
@@ -27,9 +26,6 @@
             <label asp-for="Customer.BirthDate" class="form-label"></label>
             <input asp-for="Customer.BirthDate"  class="form-control" />
             <span asp-validation-for="Customer.BirthDate"></span> <!-- Server side validation-->
-            @*
-            @Html.TextBoxFor(m => m.Customer.BirthDate, "0:d MMM yyyy", new {@class="form-control"})
-            *@
         </div>
 
         <div class="mb-3 dropdown">

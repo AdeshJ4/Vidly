@@ -31,7 +31,7 @@ namespace Vidly.Controllers
         }
         
    
-        public async Task<IActionResult> Details ( int? id )
+        public async Task<ActionResult<CustomerDto>> Details ( int? id )
         {
             Customer? customer = await _db.Customers.Include(c => c.MembershipType).SingleOrDefaultAsync(c => c.Id == id); // querry is excuted immediately because of "SingleOrDefault() method"
             if (customer == null)
@@ -40,7 +40,7 @@ namespace Vidly.Controllers
             return View(_mapper.Map<CustomerDto>(customer));
         }
 
-        public async Task<IActionResult> CustomerForm ()
+        public async Task<ActionResult<CustomerFormViewModelDTO>> CustomerForm ()  // Creating New User
         {
 
             IEnumerable<MembershipType> membershipType = await _db.MembershipType.ToListAsync();
@@ -51,24 +51,24 @@ namespace Vidly.Controllers
                 MembershipTypes = membershipType
             };
 
-            return View(viewModel);
+            //return View(viewModel);
+            return View(_mapper.Map<CustomerFormViewModel, CustomerFormViewModelDTO>(viewModel));
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]  
-        public async Task<IActionResult> Save (Customer customer)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save ( Customer customer )
         {
             if (!ModelState.IsValid)
             {
-                // if ModelState is not valid then i wan't to return same view(the view that include the customer form)
-                // viewModel is important to populate the form with the values the user has put int he form
+                
                 var viewModel = new CustomerFormViewModel
                 {
                     Customer = customer,
                     MembershipTypes = await _db.MembershipType.ToListAsync()
-                };
-                return View("CustomerForm", viewModel);
+                };                
+                return View("CustomerForm", _mapper.Map<CustomerFormViewModelDTO>(viewModel));
             }
 
 
@@ -77,23 +77,23 @@ namespace Vidly.Controllers
                 await _db.Customers.AddAsync(customer);
             else
             {
-                //Now to update an entity we need to get it from database first
-                // if the given customer is not found this is going throw an exception
+                
                 Customer customerInDb = await _db.Customers.SingleAsync(c => c.Id == customer.Id);
-                //TryUpdateModelAsync(customerInDb);  // don't use this approach beacuse of security reasons
+                
                 //AutoMapper.Mapper.Map(customer, customerInDb);
-                customerInDb.Name = customer.Name;  
+                customerInDb.Name = customer.Name;
                 customerInDb.BirthDate = customer.BirthDate;
-                customerInDb.MemberShipTypeId = customer.MemberShipTypeId; 
-                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;  
+                customerInDb.MemberShipTypeId = customer.MemberShipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
-            await _db.SaveChangesAsync();  
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        
-        
-        public async Task<IActionResult> Edit(int id)
+
+
+
+        public async Task<ActionResult<CustomerFormViewModelDTO>> Edit (int id)
         {
             Customer? customer = await _db.Customers.SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
@@ -105,7 +105,8 @@ namespace Vidly.Controllers
                 MembershipTypes = await _db.MembershipType.ToListAsync()  
             };
 
-            return View("CustomerForm", viewModel);
+            //return View("CustomerForm", viewModel);
+            return View("CustomerForm", _mapper.Map<CustomerFormViewModelDTO>(viewModel));
         }
 
 
