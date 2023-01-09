@@ -1,13 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
+using Microsoft.AspNetCore.Identity;
+using Vidly.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+builder.Services.AddDbContext<VidlyContext>(options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("VidlyContextConnection")
     ));
+
+builder.Services.AddDefaultIdentity<VidlyUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<VidlyContext>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 var app = builder.Build();
 
@@ -23,11 +28,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

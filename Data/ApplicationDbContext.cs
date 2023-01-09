@@ -3,7 +3,7 @@ using Vidly.Models;
 
 namespace Vidly.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : VidlyContext
     {
         public ApplicationDbContext ( DbContextOptions<ApplicationDbContext> options ) : base(options)
         {

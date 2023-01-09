@@ -286,3 +286,12 @@ E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\System.Net.Http.Formattin
 E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\System.Web.Http.dll
 E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\System.Reflection.MetadataLoadContext.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+E:\z Placement\dot net\Projects\Vidly\obj\Debug\net6.0\Vidly.MvcApplicationPartsAssemblyInfo.cs
