@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Areas.Identity.Data;
+using Vidly.Models;
 
 namespace Vidly.Data;
 
@@ -16,6 +17,13 @@ public class VidlyContext : IdentityDbContext<VidlyUser>
         : base(options)
     {
     }
+
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Movie> Movies { get; set; }
+
+    public DbSet<MembershipType> MembershipType { get; set; }
+
+    public DbSet<Genre> Genre { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

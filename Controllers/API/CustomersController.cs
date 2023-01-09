@@ -11,10 +11,11 @@ namespace Vidly.Controllers.API
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
+        //private readonly ApplicationDbContext _db;
+        private readonly VidlyContext _db;
         private readonly IMapper _mapper;
         
-        public CustomersController ( ApplicationDbContext db, IMapper mapper )
+        public CustomersController ( VidlyContext db, IMapper mapper )
         {
             _db = db;
             _mapper = mapper;

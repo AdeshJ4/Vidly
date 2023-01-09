@@ -9,9 +9,10 @@ namespace Vidly.Controllers
     public class MoviesController : Controller
     {
  
-        private readonly ApplicationDbContext _db;
+        //private readonly ApplicationDbContext _db;
+        private readonly VidlyContext _db;
 
-        public MoviesController(ApplicationDbContext db)
+        public MoviesController( VidlyContext db )
         {
             _db = db;
         }
@@ -91,7 +92,8 @@ namespace Vidly.Controllers
                 movieInDb.Name = movie.Name;
                 movieInDb.GenreId = movie.GenreId;
                 movieInDb.NumberInStock = movie.NumberInStock;
-                movieInDb.ReleaseDate = movie.ReleaseDate;               
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.DateAdded = movie.DateAdded;                
             }
             _db.SaveChanges();
             return RedirectToAction("Index");

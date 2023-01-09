@@ -5,16 +5,17 @@ using Vidly.Models;
 using Vidly.ViewModels;
 using AutoMapper;
 using Vidly.DTOs;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        //private readonly ApplicationDbContext _db;
+        private readonly VidlyContext _db;
         private readonly IMapper _mapper;
 
-        public CustomersController ( ApplicationDbContext db, IMapper mapper )
+        public CustomersController ( VidlyContext db, IMapper mapper )
         {
             _db = db;
             _mapper = mapper;
@@ -25,6 +26,7 @@ namespace Vidly.Controllers
             _db.Dispose();
         }
 
+        //[Authorize]
         public IActionResult Index ()
         {
             return View();
