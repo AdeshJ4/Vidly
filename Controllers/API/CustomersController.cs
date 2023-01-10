@@ -21,10 +21,6 @@ namespace Vidly.Controllers.API
             _mapper = mapper;
         }
 
-
-
-
- 
         // return all customers 
         [HttpGet]
         [Produces("application/json")]

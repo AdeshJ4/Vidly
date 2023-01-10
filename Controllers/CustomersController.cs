@@ -26,7 +26,6 @@ namespace Vidly.Controllers
             _db.Dispose();
         }
 
-        //[Authorize]
         public IActionResult Index ()
         {
             return View();
