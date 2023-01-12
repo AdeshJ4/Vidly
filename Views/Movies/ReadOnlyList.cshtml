@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+
+@{
+	ViewData["Title"] = "Movies";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+	<div class="container p-3">
+		<div class="col-6">
+			<h2 class="text-primary">Movies</h2>
+		</div>
+	</div>
+
+
+	<table id="movies" class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Movie</th>
+				<th>Genre</th>				
+			</tr>
+		</thead>
+		<tbody>
+			
+			
+		</tbody>
+	</table>
+
+	@section scripts{
+		<script>
+            $(document).ready(function () {
+                var table = $("#movies").DataTable({
+                    ajax: {
+                        url: "/api/Movies",
+                        dataSrc: ""
+                    },
+                    columns: [
+
+                        // column 1
+                        {
+                            data: "id"
+                        },
+                        //column 2
+                        {
+                            data: "name",
+                            
+
+                        },
+                        // column 3
+                        {
+                            data: "genre.name"
+                        },
+                        
+                        
+                    ]
+                });
+            });
+		</script>
+	}
+</body>
+</html>

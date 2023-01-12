@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Vidly.Areas.Identity.Data;
+using Vidly.Models;
 
 namespace Vidly.Areas.Identity.Pages.Account
 {
@@ -58,7 +59,14 @@ namespace Vidly.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-           
+            [Required]
+            [StringLength(255)]
+            public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "Driving License")]
+            public string DrivingLicense { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -92,15 +100,16 @@ namespace Vidly.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.Name = Input.Name;
+                user.DrivingLicense = Input.DrivingLicense;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
-                {
-                    //await _userManager.AddToRoleAsync(user, "CanManageMovie");
-
+                {                   
+                    //await _userManager.AddToRoleAsync(user, RoleName.CanManageMovies);
+                  
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
@@ -22,9 +23,10 @@ namespace Vidly.Controllers.API
            _mapper = mapper;
         }
 
-        
+
 
         //return all movies
+        [Authorize]
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<MovieDto>> GetMovies ()
@@ -34,6 +36,7 @@ namespace Vidly.Controllers.API
         }
 
         // return specific movie
+        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<MovieDto>> GetMovie ( [FromRoute] int id )
@@ -45,6 +48,7 @@ namespace Vidly.Controllers.API
         }
 
         // Create Movie 
+        [Authorize(Roles = RoleName.CanManageMovie)]
         [HttpPost]
         public async Task<ActionResult<MovieDto>> CreateMovie ( MovieDto movieDto )
         {
@@ -62,6 +66,7 @@ namespace Vidly.Controllers.API
 
 
         // update Movie
+        [Authorize(Roles = RoleName.CanManageMovie)]
         [HttpPut]
         [Route("{id:int}")]
         public async Task<ActionResult<MovieDto>> UpdateMovie ( [FromRoute] int id, MovieDto movieDto )
@@ -81,7 +86,7 @@ namespace Vidly.Controllers.API
         }
 
 
-
+        [Authorize(Roles = RoleName.CanManageMovie)]
         [HttpDelete]
         [Route("{id:int}")]
         public async Task<ActionResult<MovieDto>> DeleteMovie ( [FromRoute] int id )

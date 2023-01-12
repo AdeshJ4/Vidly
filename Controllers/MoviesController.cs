@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vidly.Data;
 using Vidly.Models;
@@ -24,11 +25,13 @@ namespace Vidly.Controllers
 
         public async Task<IActionResult> Index ()
         {
-            //IEnumerable<Movie> movies = await _db.Movies.Include(g => g.Genre).ToListAsync();
-            //return View(movies);
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovie)) 
+                return View("List");
+
+            return View("ReadOnlyList");            
         }
 
+        [Authorize(Roles = RoleName.CanManageMovie)]
         public async Task<IActionResult> MovieForm ()
         {
             //IEnumerable<Genre> genres = _db.Genre.ToList();
@@ -42,7 +45,7 @@ namespace Vidly.Controllers
         }
 
 
-
+        [Authorize(Roles = RoleName.CanManageMovie)]
         public async Task<IActionResult> Edit ( int id )
         {
             Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
@@ -57,6 +60,7 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Details ( int? id )
         {
             Movie? movie = await _db.Movies.Include(m => m.Genre).SingleOrDefaultAsync(c => c.Id == id);
@@ -67,8 +71,8 @@ namespace Vidly.Controllers
         }
 
 
-        
 
+        [Authorize(Roles = RoleName.CanManageMovie)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Save (Movie movie)
@@ -97,10 +101,10 @@ namespace Vidly.Controllers
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
-        }   
+        }
 
 
-
+        [Authorize(Roles = RoleName.CanManageMovie)]
         public async Task<IActionResult> Delete(int id )
         {
             Movie? movie = await _db.Movies.SingleOrDefaultAsync(c => c.Id == id);
