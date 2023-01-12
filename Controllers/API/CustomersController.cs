@@ -20,6 +20,7 @@ namespace Vidly.Controllers.API
             _db = db;
             _mapper = mapper;
         }
+        
 
         // return all customers 
         [HttpGet]

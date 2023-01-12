@@ -19,8 +19,10 @@ namespace Vidly.Controllers.API
         public MoviesController ( VidlyContext db, IMapper mapper )
         {
             _db = db;
-            _mapper = mapper;
+           _mapper = mapper;
         }
+
+        
 
         //return all movies
         [HttpGet]

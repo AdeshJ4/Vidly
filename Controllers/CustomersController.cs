@@ -21,6 +21,8 @@ namespace Vidly.Controllers
             _mapper = mapper;
         }
 
+        
+
         protected override void Dispose ( bool disposing )
         {
             _db.Dispose();

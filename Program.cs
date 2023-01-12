@@ -12,11 +12,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<VidlyContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("VidlyContextConnection")
     ));
-
+/*
+ *mosh
 builder.Services.AddDefaultIdentity<VidlyUser>(
     options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<VidlyContext>();
+*/
+// Adesh
+builder.Services.AddIdentity<VidlyUser, IdentityRole>()
+    .AddEntityFrameworkStores<VidlyContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
@@ -57,4 +64,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using (var scope = app.Services.CreateScope())
+{
+    await DbSeeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
 app.Run();

@@ -20,5 +20,7 @@ namespace Vidly.Data
         public DbSet<Genre> Genre { get; set; }
 
         */
+
+    
     }
 }

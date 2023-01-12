@@ -11,11 +11,11 @@ namespace Vidly.Controllers
  
         //private readonly ApplicationDbContext _db;
         private readonly VidlyContext _db;
-
-        public MoviesController( VidlyContext db )
+        public MoviesController ( VidlyContext db )
         {
             _db = db;
         }
+       
 
         protected override void Dispose ( bool disposing )
         {
