@@ -15,6 +15,7 @@ using Vidly.Areas.Identity.Data;
 
 namespace Vidly.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<VidlyUser> _userManager;

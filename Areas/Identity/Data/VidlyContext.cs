@@ -8,6 +8,10 @@ namespace Vidly.Data;
 
 public class VidlyContext : IdentityDbContext<VidlyUser>
 {
+    public VidlyContext ()
+    {
+    }
+
     public VidlyContext(DbContextOptions<VidlyContext> options)
         : base(options)
     {
