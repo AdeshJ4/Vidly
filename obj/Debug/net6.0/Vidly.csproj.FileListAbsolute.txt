@@ -297,3 +297,5 @@ E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.Extensions.Iden
 E:\z Placement\dot net\Projects\Vidly\obj\Debug\net6.0\Vidly.MvcApplicationPartsAssemblyInfo.cs
 E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\FluentAssertions.dll
 E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNet.Identity.Core.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+E:\z Placement\dot net\Projects\Vidly\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Vidly.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +13,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<VidlyContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("VidlyContextConnection")
     ));
-/*
- *mosh
-builder.Services.AddDefaultIdentity<VidlyUser>(
-    options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<VidlyContext>();
-*/
+
 // Adesh
 builder.Services.AddIdentity<VidlyUser, IdentityRole>()
     .AddEntityFrameworkStores<VidlyContext>()
@@ -29,12 +24,19 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddRazorPages();
 
+
 builder.Services.AddControllers(config =>
 {
     var policy = new AuthorizationPolicyBuilder()
                      .RequireAuthenticatedUser()
                      .Build();
     config.Filters.Add(new AuthorizeFilter(policy));
+});
+
+builder.Services.AddAuthentication().AddFacebook(facebookOptions =>
+{
+    facebookOptions.AppId = builder.Configuration["Authentication:Facebook:AppId"];
+    facebookOptions.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
 });
 
 var app = builder.Build();
@@ -63,6 +65,7 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 using (var scope = app.Services.CreateScope())
 {
