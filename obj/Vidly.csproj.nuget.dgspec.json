@@ -56,6 +56,26 @@
               "target": "Package",
               "version": "[6.8.0, )"
             },
+            "Glimpse": {
+              "target": "Package",
+              "version": "[1.8.6, )"
+            },
+            "Glimpse.Ado": {
+              "target": "Package",
+              "version": "[1.7.3, )"
+            },
+            "Glimpse.AspNet": {
+              "target": "Package",
+              "version": "[1.9.2, )"
+            },
+            "Glimpse.EF6": {
+              "target": "Package",
+              "version": "[1.6.5, )"
+            },
+            "Glimpse.Mvc5": {
+              "target": "Package",
+              "version": "[1.5.3, )"
+            },
             "Microsoft.AspNet.Identity.Core": {
               "target": "Package",
               "version": "[2.2.3, )"

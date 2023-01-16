@@ -91,6 +91,63 @@
           }
         }
       },
+      "Glimpse/1.8.6": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Glimpse.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Glimpse.Core.dll": {}
+        }
+      },
+      "Glimpse.Ado/1.7.3": {
+        "type": "package",
+        "dependencies": {
+          "Glimpse": "1.8.6"
+        },
+        "compile": {
+          "lib/net45/Glimpse.Ado.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Glimpse.Ado.dll": {}
+        }
+      },
+      "Glimpse.AspNet/1.9.2": {
+        "type": "package",
+        "dependencies": {
+          "Glimpse": "1.8.6"
+        },
+        "compile": {
+          "lib/net45/Glimpse.AspNet.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Glimpse.AspNet.dll": {}
+        }
+      },
+      "Glimpse.EF6/1.6.5": {
+        "type": "package",
+        "dependencies": {
+          "Glimpse.Ado": "1.7.3"
+        },
+        "compile": {
+          "lib/net45/Glimpse.EF6.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Glimpse.EF6.dll": {}
+        }
+      },
+      "Glimpse.Mvc5/1.5.3": {
+        "type": "package",
+        "dependencies": {
+          "Glimpse.AspNet": "1.8.0"
+        },
+        "compile": {
+          "lib/net45/Glimpse.Mvc5.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Glimpse.Mvc5.dll": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -4410,6 +4467,93 @@
         "lib/netstandard2.1/FluentAssertions.dll",
         "lib/netstandard2.1/FluentAssertions.pdb",
         "lib/netstandard2.1/FluentAssertions.xml"
+      ]
+    },
+    "Glimpse/1.8.6": {
+      "sha512": "jubTSNDTgjCcCLibXAB28hnC2MPRjjG5PIrx4Wc5ZILsx8qt3bdEGGIS2LRMQk8mcGHWhEFFPLWFaJQJyWtS9Q==",
+      "type": "package",
+      "path": "glimpse/1.8.6",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "docs/Glimpse.Core.Documentation.chm",
+        "glimpse.1.8.6.nupkg.sha512",
+        "glimpse.nuspec",
+        "lib/net35/Glimpse.Core.dll",
+        "lib/net40/Glimpse.Core.dll",
+        "lib/net45/Glimpse.Core.dll",
+        "tools/glimpse.psm1",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Glimpse.Ado/1.7.3": {
+      "sha512": "q3Cio5ueEjGhcRBtMeCALm2kaVkDDKn7w4OPHGnP+k3ISD0+q05gF5x3RMwVlCUGh6qJbQUXkUsK9+ihj6HQ1A==",
+      "type": "package",
+      "path": "glimpse.ado/1.7.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "glimpse.ado.1.7.3.nupkg.sha512",
+        "glimpse.ado.nuspec",
+        "lib/net35/Glimpse.Ado.dll",
+        "lib/net40/Glimpse.Ado.dll",
+        "lib/net45/Glimpse.Ado.dll",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Glimpse.AspNet/1.9.2": {
+      "sha512": "nqELu3G99CWZIEpdi7Hp7SdBU+8Dl0Y9+CluVRa4HEIGziWmFQ1lJ5Hlyk/U9IRmJ5nolVbJngeWxO4Jz2jqpQ==",
+      "type": "package",
+      "path": "glimpse.aspnet/1.9.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/GlimpseSecurityPolicy.cs.pp",
+        "content/web.config.transform",
+        "glimpse.aspnet.1.9.2.nupkg.sha512",
+        "glimpse.aspnet.nuspec",
+        "lib/net35/Glimpse.AspNet.dll",
+        "lib/net40/Glimpse.AspNet.dll",
+        "lib/net45/Glimpse.AspNet.dll",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Glimpse.EF6/1.6.5": {
+      "sha512": "rS8lcyXbjPUkaRY1Oh3LjoeOTHZtZ0j2w8QUW/PEj9ANC/hCUzPgApXjAJ3hi5XEYvFycmVoTYJBRoQ7El5ROQ==",
+      "type": "package",
+      "path": "glimpse.ef6/1.6.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "glimpse.ef6.1.6.5.nupkg.sha512",
+        "glimpse.ef6.nuspec",
+        "lib/net40/Glimpse.EF6.dll",
+        "lib/net45/Glimpse.EF6.dll",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Glimpse.Mvc5/1.5.3": {
+      "sha512": "CRSTu7iqsZy5sw4z65SrJVq5YjDlGsdaAiDvMx4/iCYnCA4+HLttiF4A0/xAVWtJFcLMsKPgOMxu1PKNJzjezw==",
+      "type": "package",
+      "path": "glimpse.mvc5/1.5.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "glimpse.mvc5.1.5.3.nupkg.sha512",
+        "glimpse.mvc5.nuspec",
+        "lib/net45/Glimpse.Mvc5.dll",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -11975,6 +12119,11 @@
       "AutoMapper >= 12.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
       "FluentAssertions >= 6.8.0",
+      "Glimpse >= 1.8.6",
+      "Glimpse.Ado >= 1.7.3",
+      "Glimpse.AspNet >= 1.9.2",
+      "Glimpse.EF6 >= 1.6.5",
+      "Glimpse.Mvc5 >= 1.5.3",
       "Microsoft.AspNet.Identity.Core >= 2.2.3",
       "Microsoft.AspNet.WebApi.Core >= 5.2.9",
       "Microsoft.AspNetCore.Authentication >= 2.2.0",
@@ -12045,6 +12194,26 @@
           "FluentAssertions": {
             "target": "Package",
             "version": "[6.8.0, )"
+          },
+          "Glimpse": {
+            "target": "Package",
+            "version": "[1.8.6, )"
+          },
+          "Glimpse.Ado": {
+            "target": "Package",
+            "version": "[1.7.3, )"
+          },
+          "Glimpse.AspNet": {
+            "target": "Package",
+            "version": "[1.9.2, )"
+          },
+          "Glimpse.EF6": {
+            "target": "Package",
+            "version": "[1.6.5, )"
+          },
+          "Glimpse.Mvc5": {
+            "target": "Package",
+            "version": "[1.5.3, )"
           },
           "Microsoft.AspNet.Identity.Core": {
             "target": "Package",
@@ -12125,6 +12294,56 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Glimpse 1.8.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Glimpse",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Glimpse.Ado 1.7.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Glimpse.Ado",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Glimpse.AspNet 1.9.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Glimpse.AspNet",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Glimpse.EF6 1.6.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Glimpse.EF6",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Glimpse.Mvc5 1.5.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Glimpse.Mvc5",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
