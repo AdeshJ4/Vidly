@@ -38,5 +38,8 @@ namespace Vidly.Models
         [Required]
         [Range(1, 20, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public byte NumberInStock { get; set; }
+
+        public byte NumberAvailable   { get; set; } 
+
     }
 }

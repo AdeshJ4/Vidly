@@ -30,6 +30,7 @@ public class VidlyContext : IdentityDbContext<VidlyUser>
 
     public DbSet<Genre> Genre { get; set; }
 
+    public DbSet<Rental> Rentals { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -5,7 +5,6 @@ using Vidly.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication;
-using Glimpse.AspNet.Tab;
 using FluentAssertions.Common;
 
 var builder = WebApplication.CreateBuilder(args);

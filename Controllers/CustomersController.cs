@@ -30,6 +30,7 @@ namespace Vidly.Controllers
 
         public IActionResult Index ()
         {
+           
             return View();
         }
         
