@@ -25,6 +25,7 @@ namespace Vidly.Controllers.API
 
 
 
+        /*
         //return all movies
         [Authorize]
         [HttpGet]
@@ -32,6 +33,26 @@ namespace Vidly.Controllers.API
         public async Task<ActionResult<MovieDto>> GetMovies ()
         {
             var res = await _db.Movies.Include(m=> m.Genre).ToListAsync();
+            return Ok(res.Select(cs => _mapper.Map<MovieDto>(cs)));
+        }
+        */
+
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        public async Task<ActionResult<MovieDto>> GetMovies ( string? query = null )
+        {
+          
+            IQueryable<Movie> moviesQuery = _db.Movies.Include(c => c.Genre);
+
+
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                moviesQuery = moviesQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var res = await moviesQuery.ToListAsync();
+
             return Ok(res.Select(cs => _mapper.Map<MovieDto>(cs)));
         }
 
