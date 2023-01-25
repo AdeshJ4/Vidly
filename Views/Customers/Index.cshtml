@@ -1,17 +1,4 @@
-﻿@*
-    @model IEnumerable<Vidly.Models.Customer> 
-    
-    Note: I've set the model for this view to IEnumerable<Customer>.
-    This is a simple interface implemented by the list class. Since
-    in this view we only want to iterate over this list, and we don't
-    need any of the operations in the List class (eg Add, Remove, etc),
-    it's better to use the IEnumerable interface, which allows use to
-    iterate over the list. If in the future, we replace the List with a
-    different data structure, as long as it is enumerable, our view code
-    will remain unchanged.
-*@
-
-@{
+﻿@{
     ViewData["Title"] = "Customers";
 }`
 
@@ -39,49 +26,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Now since we are using our API to render this table we don't need to render the customer on server
-                    so we can rid of this foreach block. But we are leaving the table structure as the placeholder for dataTable.
-                    Also in our action we don't need to get list of customers because again our DataTable is going to send an ajax request to get them from our cusatomer API.
-                    So in our Solution explorer
-
-                    For more information see dataTable_file.js
-                -->
-                @*
-                @foreach (var customer in Model)
-                {
-                *@
-                <!--
-                <tr>
-                @*
-                        <!-- The below line is not used(out dataed), this is extra code so please don't use it' -->
-                        @Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)
-                    *@
-
-                    <td>
-                @*
-                        @customer.Id
-                        *@
-                    </td>
-
-                    <td>
-                @*
-                        <a asp-route-id="@customer.Id" asp-controller="Customers" asp-action="Details">@customer.Name</a>
-                        *@
-                    </td>
-
-                    <td>
-                @*
-                        <button data-customer-id="@customer.Id" class="btn btn-primary js-delete">Delete</button>
-                        *@
-                    </td>
-
-                </tr>
-                 -->
-                 @*
-                }
-                *@
-
-
             </tbody>
         </table>
 

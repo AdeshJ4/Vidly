@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6NP7+cfpVFCu+WvNQmwA8ljc4VX/nhVGGTMvw2VHX/Yed8NKcSoHAncNQu7iOI2nNTi08Z8iMMk+NPoI+3jKnQ==",
+  "dgSpecHash": "vNjOVUzGlqd9XPurPKc2eyZ+RdFVbVhsoGlmDxGmy8kGXYirxZYpeyK9Qqt7jGhU4ikuWuD0JHi0Y/iUnf5hVQ==",
   "success": true,
   "projectFilePath": "E:\\z Placement\\dot net\\Projects\\Vidly\\Vidly.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,7 @@
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\fluentassertions\\6.8.0\\fluentassertions.6.8.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\jquery\\1.7.0\\jquery.1.7.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\jquery\\1.10.2\\jquery.1.10.2.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\jquery.datatables\\1.10.11\\jquery.datatables.1.10.11.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
@@ -226,7 +226,8 @@
     "C:\\Users\\user\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\twitter.typeahead\\0.11.1\\twitter.typeahead.0.11.1.nupkg.sha512"
   ],
   "logs": [
     {

@@ -27,15 +27,12 @@ namespace Vidly.Controllers.API
         public async Task<ActionResult<NewRentalDto>> CreateNewRentals ( NewRentalDto newRental )
         {
             
-            
             var customer = await _db.Customers.SingleAsync(c => c.Id == newRental.CustomerId);
 
             if (customer == null)
                 return BadRequest("CustomerId is not valid");
 
             var movies = await _db.Movies.Where(m => newRental.MovieIds.Contains(m.Id)).ToListAsync();
-
-            
 
             foreach(var movie in movies)
             {
