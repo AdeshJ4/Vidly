@@ -20,14 +20,33 @@ namespace Vidly.Controllers.API
             _db = db;
             _mapper = mapper;
         }
-        
 
-        // return all customers 
+        /*
+                 // return all customers 
         [HttpGet]
         [Produces("application/json")]
         public async Task<ActionResult<CustomerDto>> GetCustomers ()
         {           
             var res = await _db.Customers.Include(c => c.MembershipType).ToListAsync();
+            return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
+        }
+         */
+
+        // return all customers 
+        [HttpGet]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCustomers (string? query = null)
+        {
+            IQueryable<Customer> customersQuery = _db.Customers.Include(c => c.MembershipType);
+
+
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var res = await customersQuery.ToListAsync();
+
             return Ok(res.Select(cs => _mapper.Map<CustomerDto>(cs)));
         }
 

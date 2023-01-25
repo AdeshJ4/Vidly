@@ -1,7 +1,7 @@
 ﻿@model Vidly.ViewModels.MovieFormViewModel
 
 @{
-    ViewData["Title"] = "New Movies";
+	ViewData["Title"] = "New Movies";
 }
 
 <html>
@@ -9,62 +9,80 @@
 </head>
 <body>
 
-    <div class="mb-3">
-        <div class="col-4 mt-8">
-            <h2 class="text-primary">New Movies</h2>
-        </div>
-    </div>
+	<div class="mb-3">
+		<div class="col-4 mt-8">
+			<h2 class="text-primary">New Movies</h2>
+		</div>
+	</div>
 
-    <form method="post" asp-controller="Movies" asp-action="Save">
-        <div class="mb-3">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" class="form-control" aria-describedby="movieHelp" />
-            <span asp-validation-for="Name"></span> <!-- Server side validation-->
-            <div id="movieHelp" class="form-text">Movie Name</div>
-        </div>
+	<form method="post" asp-controller="Movies" asp-action="Save">
+		<div class="mb-3 reduceLength">
+			<label asp-for="Name" class="form-label"></label>
+			<div class="row">
+				<div class="col-md-4">
+					<input asp-for="Name" class="form-control" aria-describedby="movieHelp" />
+				</div>
+			</div>
+			<span asp-validation-for="Name"></span> <!-- Server side validation-->
+			<div id="movieHelp" class="form-text">Movie Name</div>
+		</div>
 
-        <div class="mb-3">
-            <label asp-for="ReleaseDate" class="form-label"></label>
-            <input asp-for="ReleaseDate" class="form-control" />
-            <span asp-validation-for="ReleaseDate"></span> <!-- Server side validation-->
-            @*
-            @Html.TextBoxFor(m => m.Customer.BirthDate, "0:d MMM yyyy", new {@class="form-control"})
-            *@
-        </div>
+		<div class="mb-3">
+			<label asp-for="ReleaseDate" class="form-label"></label>
+			<div class="row">
+				<div class="col-md-4">
+					<input asp-for="ReleaseDate" class="form-control" />
+				</div>
+			</div>
+			<span asp-validation-for="ReleaseDate"></span> <!-- Server side validation-->
+		</div>
 
-        <div class="mb-3">
-            <label asp-for="DateAdded" class="form-label"></label>
-            <input asp-for="DateAdded" class="form-control" />
-            <span asp-validation-for="DateAdded"></span> <!-- Server side validation-->
-        </div>
-
-
-        <div class="mb-3 dropdown">
-            <label asp-for="GenreId" class="form-label"></label>
-            <select asp-for="GenreId" asp-items="@(new SelectList(Model.Genre, "Id", "Name"))" class="form-control">
-                <option value="">--Choose Genre--</option>
-            </select>
-            <span asp-validation-for="GenreId"></span> <!-- Server side validation-->
-        </div>
-
-       
-        <div class="mb-3">
-            <label asp-for=" NumberInStock" class="form-label"></label>
-            <input asp-for=" NumberInStock" class="form-control"  />
-            <span asp-validation-for="NumberInStock"></span> <!-- Server side validation-->
-        </div>
+		<div class="mb-3">
+			<label asp-for="DateAdded" class="form-label"></label>
+			<div class="row">
+				<div class="col-md-4">
+					<input asp-for="DateAdded" class="form-control" />
+				</div>
+			</div>
+			<span asp-validation-for="DateAdded"></span> <!-- Server side validation-->
+		</div>
 
 
-        <input asp-for="Id" hidden />
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+		<div class="mb-3 dropdown">
+			<label asp-for="GenreId" class="form-label"></label>
+			<div class="row">
+				<div class="col-md-4">
+					<select asp-for="GenreId" asp-items="@(new SelectList(Model.Genre, "Id", "Name"))" class="form-control">
+						<option value="">--Choose Genre--</option>
+					</select>
+				</div>
+			</div>
+			<span asp-validation-for="GenreId"></span> <!-- Server side validation-->
+		</div>
 
-    <!-- Client side validaton-->
-    @section Scripts{
-        @{
-            <partial name="_ValidationScriptsPartial" />
-        }
-    }
-</body>
-</html>
+
+		<div class="mb-3">
+			<label asp-for=" NumberInStock" class="form-label"></label>
+			<div class="row">
+				<div class="col-md-4">
+					<input asp-for=" NumberInStock" class="form-control" />
+
+				</div>
+			</div>
+			<span asp-validation-for="NumberInStock"></span> <!-- Server side validation-->
+		</div>
+
+
+		<input asp-for="Id" hidden />
+		@Html.AntiForgeryToken()
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+
+	<!-- Client side validaton-->
+	@section Scripts{
+		@{
+			<partial name="_ValidationScriptsPartial" />
+		}
+	}
+	</body>
+	</html>
