@@ -6,17 +6,20 @@ const customerSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    minlength: 4,
+    maxlength: 50,
   },
   email: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
+    unique: true,
   },
   phone: {
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
   dateOfBirth: {
     type: Date,
@@ -62,6 +65,7 @@ function validateCustomer(customer) {
     phone: Joi.string()
       .required()
       .trim()
+      .unique()
       .pattern(/^[0-9]+$/),
     dateOfBirth: Joi.date().required(),
     status: Joi.string().valid("active", "inactive").default("active"),
@@ -71,16 +75,16 @@ function validateCustomer(customer) {
       state: Joi.string().required(),
       country: Joi.string().required(),
       postalCode: Joi.string()
-        .length(6) // Ensure the length is exactly 6 characters
+        .length(6)
         .required()
-        .pattern(/^[0-9]+$/), // Allow only numeric characters
+        .pattern(/^[0-9]+$/),
     }).required(),
     membership: Joi.object({
       level: Joi.string()
         .valid("bronze", "silver", "gold", "platinum")
         .default("bronze"),
       startDate: Joi.date().default(() => new Date()),
-      endDate: Joi.date().optional(),
+      endDate: Joi.date(),
       status: Joi.string().valid("active", "expired").default("active"),
     }).required(),
   });
