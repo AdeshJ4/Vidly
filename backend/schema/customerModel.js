@@ -12,8 +12,8 @@ const customerSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: [true, "Email address already taken"],
     trim: true,
-    unique: true,
   },
   phone: {
     type: String,
