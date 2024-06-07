@@ -1,4 +1,5 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const customerSchema = new mongoose.Schema({
   name: {
@@ -36,8 +37,8 @@ const customerSchema = new mongoose.Schema({
   membership: {
     level: {
       type: String,
-      enum: ["Bronze", "Silver", "Gold", "Platinum"],
-      default: "Bronze",
+      enum: ["bronze", "silver", "gold", "platinum"],
+      default: "bronze",
     },
     startDate: {
       type: Date,
@@ -54,33 +55,60 @@ const customerSchema = new mongoose.Schema({
   },
 });
 
+function validateCustomer(customer) {
+  const joiSchema = Joi.object({
+    name: Joi.string().required().trim().min(5).max(50),
+    email: Joi.string().required().trim().email(),
+    phone: Joi.string()
+      .required()
+      .trim()
+      .pattern(/^[0-9]+$/),
+    dateOfBirth: Joi.date().required(),
+    status: Joi.string().valid("active", "inactive").default("active"),
+    address: Joi.object({
+      street: Joi.string().required(),
+      city: Joi.string().required(),
+      state: Joi.string().required(),
+      country: Joi.string().required(),
+      postalCode: Joi.string()
+        .length(6) // Ensure the length is exactly 6 characters
+        .required()
+        .pattern(/^[0-9]+$/), // Allow only numeric characters
+    }).required(),
+    membership: Joi.object({
+      level: Joi.string()
+        .valid("bronze", "silver", "gold", "platinum")
+        .default("bronze"),
+      startDate: Joi.date().default(() => new Date()),
+      endDate: Joi.date().optional(),
+      status: Joi.string().valid("active", "expired").default("active"),
+    }).required(),
+  });
+
+  return joiSchema.validate(customer);
+}
+
 const Customer = mongoose.model("Customer", customerSchema);
 
-export default Customer;
+module.exports = { Customer, validateCustomer };
 
 /*
-
-const newCustomer = new Customer({
-  name: "John Doe",
-  email: "john.doe@example.com",
-  phone: "+1 (123) 456-7890",
-  address: {
-    street: "123 Main St",
-    city: "Pune",
-    state: "CA",
-    postalCode: "12345",
-    country: "USA",
-  },
-  dateOfBirth: "1980-01-01",
-  profilePic: "https://example.com/images/john_doe.jpg",
-  membership: {
-    level: "Gold",
-    startDate: new Date("2023-01-01"),
-    endDate: new Date("2024-01-01"),
-    status: "active",
-  },
-});
-newCustomer.save();
-
-
+{
+    "name": "Adesh Jadhav",
+    "email": "jadhavadesh13061@gmail.com",
+    "phone": "9527370288",
+    "dateOfBirth": "2001-06-22",
+    "address": {
+        "street": "123 Main St",
+        "city": "Pune",
+        "state": "CA",
+        "postalCode": "123456",
+        "country": "India"
+    },
+      "membership": {
+    "level": "Gold",
+    "endDate": "2024-07-30",
+    "status": "active"
+  }
+}
 */
