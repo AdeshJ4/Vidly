@@ -12,14 +12,16 @@ const customerSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: [true, "Email address already taken"],
     trim: true,
-    unique: true,
   },
   phone: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
+    unique: [true, "Phone no already taken"],
+    minlength: 10,
+    maxlength: 10,
   },
   dateOfBirth: {
     type: Date,
@@ -65,7 +67,6 @@ function validateCustomer(customer) {
     phone: Joi.string()
       .required()
       .trim()
-      .unique()
       .pattern(/^[0-9]+$/),
     dateOfBirth: Joi.date().required(),
     status: Joi.string().valid("active", "inactive").default("active"),
