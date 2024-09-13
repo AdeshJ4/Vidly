@@ -140,6 +140,14 @@ customerRoute.put("/:id", validateObjectId, async (req, res) => {
       new: true,
     });
 
+    if (!customer) {
+      return handleError({
+        res,
+        message: `The Customer with given id ${req.params.id} not found`,
+        status: 400,
+      });
+    }
+
     return res.status(200).json({ status: "success", data: customer });
   } catch (error) {
     return handleError({ res, error, status: 500 });
